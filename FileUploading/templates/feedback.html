@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        @media screen and (max-width: 768px) {
+        header {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        nav {
+            margin: 10px 0;
+        }
+
+        nav ul {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        nav li {
+            margin: 10px 0;
+        }
+
+        .container {
+            flex-direction: column;
+        }
+
+        .left-section,
+        .right-section {
+            margin: 20px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+        }
+
+        .rating-slider {
+            width: 100%;
+        }
+
+        .rating-options {
+            width: 100%;
+            flex-wrap: wrap;
+        }
+
+        .feedback-box {
+            top: -50px;
+            width: 100%;
+            margin: 10px 0;
+        }
+    }
+       body.loading {
+            visibility: hidden;
+        }
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+        }
+        .container1 {
+    max-width: 1100px;
+    margin: 60px auto; /* Center the container vertically and horizontally */
+    padding: 0 20px; /* Add padding to the container */
+}
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Align items to the left */
+            background-color: white;
+            padding: 10px 40px;
+            color: black;
+            border: 1px solid black;
+            border-radius: 7px;
+    width: 100%;
+    margin: 20px auto; /* Center the slider */
+        }
+
+        nav {
+            margin-left: auto; /* Push nav to the right, leaving logo at the left */
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            font-size: 17px;
+        }
+
+        nav li {
+            margin-right: 150px;
+            
+        }
+
+        nav a {
+            text-decoration: none;
+            color: grey;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: black; /* Change color to black on hover */
+        }
+
+
+        img {
+            
+            height: 70px;
+        }
+        .profile-logo {
+            height: 20px;
+        }
+        .container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    margin-top: -13px;
+    flex-wrap: wrap; /* Add flex-wrap to ensure responsiveness */
+}
+
+        .left-section img,
+.right-section img {
+    height: 130px;
+    width: 130px;
+    margin-bottom: 60px; /* Adjusted for better spacing */
+}
+
+.left-section,
+.right-section {
+    margin: 30px 0; /* Adjusted for spacing */
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    width: 48%; /* Adjusted width to allow for some spacing */
+    max-width: 106px; /* Added a maximum width for better responsiveness */
+}
+
+        .input-group {
+            margin: 60px auto; /* Center the container vertically and horizontally */
+    padding: 0 20px; /* Add padding to the container */
+    width: 40%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+        }
+
+        input, select, textarea {
+            margin: 10px;
+            width: 140%;
+            border: 1px solid rgb(199, 182, 182);
+            background-color: rgb(249, 245, 245);
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        textarea{
+            height: 20%;
+        }
+            
+
+        input {
+            height: 6%;
+        }
+
+        select {
+            height: 6%;
+            padding-left: 8px;
+            font-size: 15px;
+            background-color: rgb(249, 245, 245);
+        }
+
+        label {
+            color: grey;
+            margin-top: 25px;
+            margin-bottom: 5px;
+            text-align: left;
+            width: 140%;
+        }
+
+        input[type="range"] {
+            height: 10%;
+            width: 60%;
+            margin: 0px 10px;
+            height: 20px;
+        }
+
+        .rating-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            width: 110%;
+            margin: 20px auto;
+        }
+        .rating-slider {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 170%; /* Adjust the width as needed */
+    margin: 10 auto; /* Center the slider within the container */
+    }
+.rating-slider-container {
+    position: relative;
+    display: flex; /* Make the container a flex container */
+    align-items: center; /* Center items vertically in the container */
+    margin-top: 30px;
+}
+
+.rating-face {
+    width: 40px; /* Adjust the width as needed */
+    margin: 0 10px; /* Adjust the margin to bring faces closer */
+    display: flex; /* Make it a flex container */
+    flex-direction: column-reverse; /* Reverse the order of items vertically */
+}
+
+.rating-face img {
+    height: 35px; /* Adjust the height as needed */
+}
+
+
+        .rating-option {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+        .rating-options {
+            display: flex;
+            justify-content: space-between;
+            width: 140%; /* Make the rating options cover the full width */
+        }
+
+        .rating-option:hover {
+            border-color: rgb(121, 121, 174);
+        }
+        .rating-slider-container {
+        position: relative;
+    }
+
+    .feedback-box {
+        position: absolute;
+        top: -30px; /* Adjust the top position as needed */
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgb(249, 245, 245);
+        width: 90px;
+        border: 1px solid #ccc;
+        padding: 5px;
+        border-radius: 5px;
+        display: inline-block;
+        text-align: center;
+        font-size: 12px;
+    }
+    /* Additional styles for the text below rating options */
+.rating-option {
+    position: relative;
+    text-align: center;
+}
+
+.rating-option:after {
+    content: attr(data-text);
+    position: absolute;
+    top: 48px;
+    left: -17px;
+    width: 204%;
+    font-size: 12px;
+    color: grey;
+}
+.submit-button-container {
+    text-align: center;
+    margin-top: 40px; /* Adjust the margin as needed */
+}
+
+/* Add these styles for the submit button */
+.submit-button {
+    background-color: rgb(82, 128, 226);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 720px;
+    margin-right: -150px;
+}
+
+    </style>
+    <!-- Add your other head elements (links, scripts, etc.) here -->
+    <title>Your Fitness App</title>
+    <script>
+        function submitFeedback() {
+      
+        alert("Feedback submitted!");
+    }
+    
+    function updateFeedback() {
+        var slider = document.getElementById("ratings");
+        var feedbackBox = document.getElementById("feedback-box");
+    
+        var newPosition = (slider.value / 100) * slider.clientWidth - feedbackBox.clientWidth + 159;
+        feedbackBox.innerHTML = getFeedbackMessage(slider.value); // Change this line
+    
+        feedbackBox.style.left = newPosition + "px";
+      
+        document.getElementsByName("demo_rating")[0].value = slider.value;
+    }
+        function getFeedbackMessage(value) {
+            if (value <= 30) {
+                return "Strongly Dislike";
+            } else if (value <= 50) {
+                return "Dislike";
+            } else if (value <= 70) {
+                return "Neutral";
+            } else if (value <= 90) {
+                return "Like";
+            } else {
+                return "Love";
+            }
+        }
+        document.addEventListener("DOMContentLoaded", function () {
+        var ratingOptions = document.querySelectorAll(".rating-option");
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var futureProjectsOptions = document.querySelectorAll("[name='future_projects_rating']");
+
+            futureProjectsOptions.forEach(function (option) {
+                option.addEventListener("click", function () {
+                    futureProjectsOptions.forEach(function (otherOption) {
+                        otherOption.classList.remove("selected");
+                    });
+                    option.classList.add("selected");
+                    var selectedValue = option.getAttribute("value");
+                    console.log("Selected value:", selectedValue);
+                }); });
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <div class="container1">
+    <form method="post" action="{% url 'feedback' %}">
+        {% csrf_token %}
+    <header>
+        <div class="logo">
+            <img src="https://cdn.pixabay.com/photo/2022/05/21/21/33/vitruvian-man-7212326_1280.png" alt="Your Logo">
+        </div>
+        <nav>
+            <ul>
+                <li class="home-link"><a href="/home">Home</a></li>
+                <li><a href="/how_to_use">How to Use</a></li>
+                <li><a href="/excercise">Select Exercise</a></li>
+                <li><a href="/feedback">Feedback</a></li>
+            </ul>
+        </nav>
+        <img class="profile-logo" src="images/user (1).png" alt="Profile Logo">
+    </header>
+
+    <div class="container">
+        <div class="left-section">
+            <img src="images/towfiqu-barbhuiya-0ZUoBtLw3y4-unsplash.jpg" alt="Image 1">
+            <img src="images/towfiqu-barbhuiya-0ZUoBtLw3y4-unsplash.jpg" alt="Image 2">
+            <img src="images/towfiqu-barbhuiya-0ZUoBtLw3y4-unsplash.jpg" alt="Image 3">
+        </div>
+
+        <div class="input-group">
+            <label for="ratings">What do you think of our demo?</label>
+            <div class="rating-slider-container">
+                <div class="rating-face">
+                    <img src="images/sad-face.png" alt="Sad Face">
+                </div>
+                <input type="range" id="ratings" name="demo_rating" min="0" max="100" step="1" oninput="updateFeedback()">
+                <div class="rating-face">
+                    <img src="images/happiness.png" alt="Happy Face">
+                </div>
+                <div id="feedback-box" class="feedback-box">Neutral</div>
+            </div>
+
+                <label>Please select a subject</label>
+                <select name="subject">
+                    <option name="subject" value="suggestions">Suggestions</option>
+                    <option value="compliment">Compliment</option>
+                    <option value="broken">Something Broken</option>
+                    <option value="question">I have a question</option>
+                </select>
+
+            <label for="feedback">What would you like to share with us?</label>
+            <textarea id="feedback" name="feedback" rows="4" placeholder=""></textarea>
+                        <label for="email">Email Address</label>
+            <input type="email" name ="email" id="email">
+
+            <div class="rating-container">
+                <label for="future-projects">How likely are you to work with us on future projects?</label>
+                <div id="future-projects" class="rating-options">
+                   <div class="rating-option selected" data-text="Not very likely" value="1">1</div>
+<div class="rating-option" value="2">2</div>
+                    <div class="rating-option" name="future_projects_rating" value="2" >2</div>
+                    <div class="rating-option" name="future_projects_rating" value="3">3</div>
+                    <div class="rating-option" name="future_projects_rating" value="4" >4</div>
+                    <div class="rating-option" name="future_projects_rating" value="5">5</div>
+                    <div class="rating-option" name="future_projects_rating" value="6">6</div>
+                    <div class="rating-option" name="future_projects_rating" value="7">7</div>
+                    <div class="rating-option" name="future_projects_rating" value="8">8</div>
+                    <div class="rating-option" name="future_projects_rating" value="9">9</div>
+                    <div class="rating-option" data-text="Very likely" name="future_projects_rating" value="10" >10</div>
+                </div>
+
+            </div>
+        </div>
+        <div class="submit-button-container">
+            <button type="submit" class="submit-button" onclick="submitFeedback()">Submit</button>
+        </div>
+        
+
+        <div class="right-section">
+            <img src="images/towfiqu-barbhuiya-0ZUoBtLw3y4-unsplash.jpg" alt="Image 4">
+            <img src="images/towfiqu-barbhuiya-0ZUoBtLw3y4-unsplash.jpg" alt="Image 5">
+            <img src="images/towfiqu-barbhuiya-0ZUoBtLw3y4-unsplash.jpg" alt="Image 6">
+        </div>
+    </div>
+    </div>
+    </form>
+
+</body>
+</html>

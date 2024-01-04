@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Your existing head content -->
+
+    <style>
+        .info-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -40%);
+            width: 120vmin; /* Adjust the size of the square */
+            height: 50vmin;
+            display: flex;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Adjust the shadow as needed */
+        }
+        .container {
+    max-width: 1100px;
+    margin: 60px auto; /* Center the container vertically and horizontally */
+    padding: 0 20px; /* Add padding to the container */
+}
+        .info-text {
+            width: 50%;
+            padding: 20px;
+            overflow-y: auto;
+            max-height: 100%;
+        }
+
+        .info-image {
+            width: 50%;
+            overflow: hidden;
+        }
+
+        .info-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Align items to the left */
+            background-color: white;
+            padding: 10px 40px;
+            color: black;
+            border: 1px solid black;
+            border-radius: 7px;
+    width: 100%;
+    margin: 20px auto; /* Center the slider */
+        }
+
+        nav {
+            margin-left: auto; /* Push nav to the right, leaving logo at the left */
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            font-size: 17px;
+        }
+
+        nav li {
+            margin-right: 150px;
+            
+        }
+
+        nav a {
+            text-decoration: none;
+            color: grey;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: black; /* Change color to black on hover */
+        }
+
+
+        img {
+            
+            height: 70px;
+        }
+        .profile-logo {
+            height: 20px;
+        }
+        .step-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    padding: 21px; /* Add padding for spacing */
+    margin-left: auto; /* Center the container horizontally */
+    margin-right: auto; /* Center the container horizontally */
+    width: 90%; /* Set a max-width if needed */
+    height: 70px;
+}
+
+
+.step:nth-child(4) {
+    border-left: none; /* Remove left border for Step 2 and Step 3 */
+}
+
+        .step {
+            position: relative;
+            flex: 1;
+           
+            padding: 15px; /* Increase padding for larger size */
+            cursor: pointer;
+            border: 1px solid #0073b1;
+            transition: background-color 0.3s ease;
+        }
+        .step:not(:last-child) {
+    border-right: none;
+}
+
+        .step::before {
+            content: attr(data-step-number);
+            display: block;
+            font-size: 40px;
+            margin-left: 23px;
+           
+        }
+
+        .step:hover {
+            background-color: #0073b1;
+            color: #fff;
+        }
+
+        .step-text {
+    font-size: 14px;
+    font-weight: normal;
+    position: relative;
+    color: grey;
+    top: -45px; /* Adjust the top position to move the text up */
+    display: inline-block; /* Add this property to make top work */
+    background-color: white; /* Add a background color to cover the step number */
+    margin-left: 70px;
+    transition: background-color 0.3s ease;
+}
+.step.active,
+        .step.active .step-text {
+            background-color: #0073b1;
+            color: #fff;
+            transition: background-color 0.3s ease;
+        }
+        .info-container {
+    position: absolute;
+    top: 72%; /* Adjust the vertical position */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%; /* Adjust the width percentage */
+
+    height: 50vh; /* Adjust the height percentage */
+    display: flex;
+    margin-bottom: 70px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Adjust the shadow as needed */
+}
+
+.info-text {
+    width: 49%;
+    padding: 20px;
+    overflow-y: auto;
+    max-height: 100%;
+    align-items: right;
+}
+
+.info-image {
+    width: 51%;
+    overflow: hidden;
+    display: flex;
+    align-items: left; 
+}
+
+.info-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.step:hover,
+.step:hover .step-text {
+    background-color: #0073b1;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+    <header>
+        <div class="logo">
+            <img src="https://cdn.pixabay.com/photo/2022/05/21/21/33/vitruvian-man-7212326_1280.png" alt="Your Logo">
+        </div>
+        <nav>
+            <ul>
+                <ul>
+                    <li class="home-link"><a href="/home">Home</a></li>
+                    <li><a href="/how_to_use">How to Use</a></li>
+                    <li><a href="/excercise">Select Exercise</a></li>
+                    <li><a href="/feedback">Feedback</a></li>
+            </ul>
+        </nav>
+        <img class="profile-logo" src="images/user (1).png" alt="Profile Logo">
+        
+    </header>
+    <div class="step-container">
+        <div class="step" data-step-number="1" onclick="showStep(1)">
+            <span class="step-text"><b>Step 1</b> <br>Instructions</span>
+        </div>
+        <div class="step" data-step-number="2" onclick="showStep(2)">
+            <span class="step-text"><b>Step 2</b><br> Instructions</span>
+        </div>
+        <div class="step" data-step-number="3" onclick="showStep(3)">
+            <span class="step-text"><b>Step 3</b> <br>Instructions</span>
+        </div>
+    </div>
+    <div class="info-container">
+        <div id="info-image-container" class="info-image">
+            <img src="images/alora-griffiths-TuzrzArccvc-unsplash.jpg" alt="Full-size Image" id="info-image">
+        </div>
+        <div class="info-text">
+            <h2>Lorem Ipsum</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus nemo, inventore aut ipsam assumenda recusandae repellat laborum dolorem obcaecati tempora et voluptas vero consequuntur illum animi deleniti fuga possimus quibusdam. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente sequi assumenda porro, eaque aliquid, officia exercitationem, ad vitae voluptatibus voluptates molestias! Corporis quod ad consequatur iste cupiditate fugiat voluptates eaque! Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid magni magnam distinctio. Nobis atque cum incidunt aspernatur corporis, nostrum magni magnam ex pariatur possimus totam doloremque minus vitae aut perspiciatis. Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio inventore velit iusto porro quae facere, quaerat numquam distinctio, sit in rerum adipisci cupiditate saepe soluta? Architecto corrupti delectus vel explicabo. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+    </div>
+    </div>
+    <script>
+        function showStep(stepNumber) {
+            // Remove 'active' class from all steps
+            var steps = document.querySelectorAll('.step');
+            steps.forEach(function (step) {
+                step.classList.remove('active');
+            });
+
+            // Add 'active' class to the clicked step
+            var activeStep = document.querySelector('.step[data-step-number="' + stepNumber + '"]');
+            activeStep.classList.add('active');
+
+            // Update image source based on the step number
+            var imageContainer = document.getElementById("info-image-container");
+            var imageElement = document.getElementById("info-image");
+
+            switch (stepNumber) {
+                case 1:
+                    imageElement.src = "images/alora-griffiths-TuzrzArccvc-unsplash.jpg"; // Replace with the path to your Step 1 image
+                    break;
+                case 2:
+                    imageElement.src = "images/fortune-vieyra-jD4MtXnsJ6w-unsplash.jpg"; // Replace with the path to your Step 2 image
+                    break;
+                case 3:
+                    imageElement.src = "images/james-barr-7U0yuZcS5yA-unsplash.jpg"; // Replace with the path to your Step 3 image
+                    break;
+                // Add more cases for additional steps if needed
+            }
+
+            // Add logic to show the content related to the selected step
+            console.log("Show content for Step " + stepNumber);
+        }
+        document.addEventListener("DOMContentLoaded", function () {
+    // Trigger click on Step 1 when the page is loaded
+    showStep(1);
+});
+
+    </script>
+    <!-- Your existing JavaScript libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+</body>
+</html>
