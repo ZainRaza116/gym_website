@@ -10,84 +10,89 @@
             font-family: 'Arial', sans-serif;
         }
         .container {
+    position: relative; /* Add this line */
     max-width: 1100px;
-    margin: 60px auto; /* Center the container vertically and horizontally */
-    padding: 0 20px; /* Add padding to the container */
+    margin: 60px auto;
+    padding: 0 20px;
+    text-align: center; /* Center the content within the container */
 }
-        header {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start; /* Align items to the left */
-            background-color: white;
-            padding: 10px 40px;
-            color: black;
-            border: 1px solid black;
-            border-radius: 7px;
-    width: 100%;
-    margin: 20px auto; /* Center the slider */
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: white;
+    padding: 10px 40px;
+    color: black;
+    border: 1px solid black;
+    border-radius: 7px;
+    width: 90%;
+    margin: 20px auto;
+}
+
+nav {
+    margin: 0 auto; /* Center the nav element */
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    font-size: 17px;
+    flex-wrap: wrap;
+    justify-content: center; /* Center the items in the navigation */
+}
+
+nav li {
+    margin-right: 80px;
+}
 
 
-        }
 
-        nav {
-            margin-left: auto; /* Push nav to the right, leaving logo at the left */
-        }
+nav a {
+    text-decoration: none;
+    color: grey;
+    transition: color 0.3s;
+}
 
-        nav ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            font-size: 17px;
-        }
+nav a:hover {
+    color: black;
+}
 
-        nav li {
-            margin-right: 150px;
-            
-        }
+img {
+    height: 70px;
+}
 
-        nav a {
-            text-decoration: none;
-            color: grey;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: black; /* Change color to black on hover */
-        }
+.profile-logo {
+    height: 20px;
+}
 
 
-        img {
-            
-            height: 70px;
-        }
-        .profile-logo {
-            height: 20px;
-        }
-        .slider {
+.slider {
     width: 80%;
     margin: 20px auto; /* Center the slider */
+    overflow: hidden; /* Hide overflowing content */
 }
 
-        .slide {
-            text-align: center;
-        }
+.slide {
+    text-align: center;
+}
 
-        .slide img {
-            width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
+.slide img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
 
-        .content {
-            padding: 20px;
-        }
+.content {
+    padding: 20px;
+}
 
-        .learn-more-btn {
-    
+.learn-more-btn {
     background-color: #ffffff;
     color: grey;
-    border: 1px solid grey; /* Set the border color and width */
+    border: 1px solid grey;
     padding: 10px 20px;
     text-decoration: none;
     display: inline-block;
@@ -96,10 +101,11 @@
 }
 
 .learn-more-btn:hover {
-    background-color: #f2f2f2; /* Change background color on hover */
-    border-color: grey; /* Change border color on hover */
-    color: grey; /* Change text color on hover */
+    background-color: #f2f2f2;
+    border-color: grey;
+    color: grey;
 }
+
         .slick-prev,
         .slick-next {
             font-size: 24px;
@@ -139,6 +145,14 @@ h3 {
     padding: 20px;
 }
 
+.info-text h2 {
+    font-size: 32px; /* Set the default font size for h2 */
+}
+
+.info-text p {
+    font-size: 16px; /* Set the default font size for paragraphs */
+}
+
 .info-image {
     flex: 1;
     overflow: hidden;
@@ -149,7 +163,6 @@ h3 {
     height: 100%;
     object-fit: cover;
 }
-
 .slick-prev, .slick-next {
         font-size: 24px;
         color: #0073b1;
@@ -205,27 +218,98 @@ h3 {
     align-items: left;
 }
 .slider-navigation {
-      position: absolute;
-      top: 50%;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      transform: translateY(-50%);
-    }
-
-    .slider-navigation button {
-      background: none;
-      border: none;
-      font-size: 54px;
-      cursor: pointer;
-      margin: 20px;
-    }      
-    .slider-navigation button:first-child {
-    margin-left: 20px; /* Adjust the margin for the first button */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Center vertically */
+    padding: 0 20px;
+    width:90%
 }
 
-.slider-navigation button:last-child {
-    margin-right: 400px; /* Adjust the margin for the last button */
+.slider-navigation button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    margin-top: -300px;
+    color: black;
+    font-size: 40px;
+}
+
+.slider-navigation button.prev {
+    margin-left: 0;
+}
+
+.slider-navigation button.next {
+    margin-right: 0;
+}
+
+@media screen and (max-width: 900px) {
+    
+    .dot {
+            width: 14px;
+            height: 14px;
+        }
+    .learn-more-btn {
+        font-size: 12px;
+    }
+    .slider {
+        width: 80%; /* Make the slider full-width on smaller screens */
+    }
+    .content h3 {
+        font-size: 13px; /* Adjust font size for smaller screens */
+    }
+    .disc{
+        font-size: 10px;
+    }
+    nav li {
+        
+        margin: 0;
+        margin-right: 20px;
+        font-size: 14px;
+    }
+
+    nav {
+        overflow: auto;
+    }
+
+    nav a {
+        margin: 5px;
+    }
+
+    nav.show-menu li {
+        display: block;
+    }
+    .info-container {
+        flex-direction: row; /* Stack items vertically on smaller screens */
+        width: 80%; /* Make the container full-width on smaller screens */
+        
+    }
+
+    .info-text h2 {
+        font-size: 24px; /* Adjust h2 font size for smaller screens */
+    }
+
+    .info-text p {
+        font-size: 14px; /* Adjust paragraph font size for smaller screens */
+    }
+    .slider-navigation button {
+        display: block;
+        margin-top: -500px;
+        padding: 5px;
+      
+    }
+
+}
+@media screen and (m-width: 100px) {
+    .slider-navigation button {
+        margin-top: -250px; /* Adjust this value for middle range vertical alignment */
+    }
 }
     </style>
 <head>
@@ -262,7 +346,7 @@ h3 {
                 <h3>Feature #2</h3>
                 <p class="disc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore et eos iusto animi quisquam asperiores quia, Lorem ipsum
                 </p>
-                <a href="#" class="learn-more-btn">Learn more</a>
+                <a href="#" class="learn-more-btn">Learn More</a>
             </div>
         </div>
         <div class="slide">
@@ -271,7 +355,7 @@ h3 {
                 <h3>Feature #3</h3>
                 <p class="disc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore et eos iusto animi quisquam asperiores quia, Lorem ipsum
                 </p>
-                <a href="#" class="learn-more-btn">Learn more</a>
+                <a href="#" class="learn-more-btn">Learn More</a>
             </div>
         </div>
         <div class="slide">
@@ -280,7 +364,7 @@ h3 {
                 <h3>Feature #4</h3>
                 <p class="disc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore et eos iusto animi quisquam asperiores quia, Lorem ipsum
                 </p>
-                <a href="#" class="learn-more-btn">Learn more</a>
+                <a href="#" class="learn-more-btn">Learn More</a>
             </div>
         </div>
         <div class="slide">
@@ -289,7 +373,7 @@ h3 {
                 <h3>Feature #5</h3>
                 <p class="disc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore et eos iusto animi quisquam asperiores quia, Lorem ipsum
                 </p>
-                <a href="#" class="learn-more-btn">Learn more</a>
+                <a href="#" class="learn-more-btn">Learn More</a>
             </div>
         </div>
         <div class="slide">
@@ -298,7 +382,7 @@ h3 {
                 <h3>Feature #6</h3>
                 <p class="disc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore et eos iusto animi quisquam asperiores quia, Lorem ipsum
                 </p>
-                <a href="#" class="learn-more-btn">Learn more</a>
+                <a href="#" class="learn-more-btn">Learn More</a>
             </div>
         </div>
         <div class="slide">
@@ -307,7 +391,7 @@ h3 {
                 <h3>Feature #7</h3>
                 <p class="disc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore et eos iusto animi quisquam asperiores quia, Lorem ipsum
                 </p>
-                <a href="#" class="learn-more-btn">Learn more</a>
+                <a href="#" class="learn-more-btn">Learn More</a>
             </div>
         </div>
         <div class="slide">
@@ -316,7 +400,7 @@ h3 {
                 <h3>Feature #8</h3>
                 <p class="disc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore et eos iusto animi quisquam asperiores quia, Lorem ipsum
                 </p>
-                <a href="#" class="learn-more-btn">Learn more</a>
+                <a href="#" class="learn-more-btn">Learn More</a>
             </div>
         </div>
         <div class="slide">
@@ -325,7 +409,7 @@ h3 {
                 <h3>Feature #9</h3>
                 <p class="disc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore et eos iusto animi quisquam asperiores quia, Lorem ipsum
                 </p>
-                <a href="#" class="learn-more-btn">Learn more</a>
+                <a href="#" class="learn-more-btn">Learn More</a>
             </div>
         </div>
         <div class="slide">
@@ -334,11 +418,15 @@ h3 {
                 <h3>Feature #1</h3>
                 <p class="disc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore et eos iusto animi quisquam asperiores quia, Lorem ipsum
                 </p>
-                <a href="#" class="learn-more-btn">Learn more</a>
+                <a href="#" class="learn-more-btn">Learn More</a>
             </div>
         </div>
 
      </div>
+     <div class="slider-navigation">
+        <button class="dot" onclick="showGroup(currentSlide - 1)">❮</button>
+        <button class="dot" onclick="showGroup(currentSlide + 1)">❯</button>
+    </div>
      <div class="dot-container">
         <div class="dot active" onclick="showGroup(0)"></div>
         <div class="dot" onclick="showGroup(1)"></div>
@@ -346,11 +434,10 @@ h3 {
     </div>
     <!-- Optional: Navigation buttons -->
 <!-- Optional: Navigation buttons -->
-<div class="slider-navigation">
-    <button class="dot" onclick="showGroup(currentSlide - 1)">❮</button>
-    <button class="dot" onclick="showGroup(currentSlide + 1)">❯</button>
-</div>
-  
+
+
+
+
 
 
 <div class="info-container">
@@ -358,8 +445,8 @@ h3 {
         <img src="images/victor-freitas-WvDYdXDzkhs-unsplash.jpg" alt="Full-size Image">
     </div>
     <div class="info-text">
-        <h2>Lorem Ipsum</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, excepturi doloremque eligendi odit maxime beatae quibusdam sapiente alias, quidem, eius velit accusantium dignissimos. Vero a, consectetur saepe voluptatem quas cum?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt aspernatur nihil amet ex voluptates itaque nobis laborum consequuntur aliquid cupiditate inventore perspiciatis numquam beatae, totam repudiandae officia commodi iusto a.</p>
+    
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex voluptate quo maxime ipsam laborum quia porro nisi fuga, in et unde est sequi distinctio quas nam repellendus eius veniam? Quisquam! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, excepturi doloremque eligendi odit maxime beatae quibusdam sapiente alias, quidem, eius velit accusantium dignissimos. Vero a, consectetur saepe voluptatem quas cum?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt aspernatur nihil amet ex voluptates itaque nobis laborum consequuntur aliquid cupiditate inventore perspiciatis numquam beatae, totam repudiandae officia commodi iusto a.</p>
     </div>
 </div>
 

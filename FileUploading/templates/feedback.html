@@ -2,122 +2,77 @@
 <html lang="en">
 <head>
     <style>
-        @media screen and (max-width: 768px) {
-        header {
-            flex-direction: column;
-            align-items: stretch;
-        }
-
-        nav {
-            margin: 10px 0;
-        }
-
-        nav ul {
-            flex-direction: column;
-            align-items: stretch;
-        }
-
-        nav li {
-            margin: 10px 0;
-        }
-
-        .container {
-            flex-direction: column;
-        }
-
-        .left-section,
-        .right-section {
-            margin: 20px;
-        }
-
-        input,
-        select,
-        textarea {
-            width: 100%;
-        }
-
-        .rating-slider {
-            width: 100%;
-        }
-
-        .rating-options {
-            width: 100%;
-            flex-wrap: wrap;
-        }
-
-        .feedback-box {
-            top: -50px;
-            width: 100%;
-            margin: 10px 0;
-        }
-    }
-       body.loading {
-            visibility: hidden;
+                .container1 {
+            position: relative;
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 0 20px;
+            text-align: center;
         }
         body {
             margin: 0;
             font-family: 'Arial', sans-serif;
         }
-        .container1 {
-    max-width: 1100px;
-    margin: 60px auto; /* Center the container vertically and horizontally */
-    padding: 0 20px; /* Add padding to the container */
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: white;
+    padding: 10px 40px;
+    color: black;
+    border: 1px solid black;
+    border-radius: 7px;
+    width: 90%;
+    margin: 20px auto;
 }
 
-        header {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start; /* Align items to the left */
-            background-color: white;
-            padding: 10px 40px;
-            color: black;
-            border: 1px solid black;
-            border-radius: 7px;
-    width: 100%;
-    margin: 20px auto; /* Center the slider */
-        }
+nav {
+    margin: 0 auto; /* Center the nav element */
+}
 
-        nav {
-            margin-left: auto; /* Push nav to the right, leaving logo at the left */
-        }
-
-        nav ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            font-size: 17px;
-        }
-
-        nav li {
-            margin-right: 150px;
-            
-        }
-
-        nav a {
-            text-decoration: none;
-            color: grey;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: black; /* Change color to black on hover */
-        }
-
-
-        img {
-            
-            height: 70px;
-        }
-        .profile-logo {
-            height: 20px;
-        }
-        .container {
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
     display: flex;
-    justify-content: space-between;
-    margin: 20px;
-    margin-top: -13px;
-    flex-wrap: wrap; /* Add flex-wrap to ensure responsiveness */
+    font-size: 17px;
+    flex-wrap: wrap;
+    justify-content: center; /* Center the items in the navigation */
+}
+
+nav li {
+    margin-right: 80px;
+}
+
+
+
+nav a {
+    text-decoration: none;
+    color: grey;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: black;
+}
+
+img {
+    height: 70px;
+}
+
+.profile-logo {
+    height: 20px;
+}
+
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: -72px auto;
+    flex-wrap: wrap;
+    width: 80%;
 }
 
         .left-section img,
@@ -147,14 +102,23 @@
 
         }
 
-        input, select, textarea {
-            margin: 10px;
-            width: 140%;
-            border: 1px solid rgb(199, 182, 182);
-            background-color: rgb(249, 245, 245);
-            border-radius: 4px;
-            font-size: 16px;
-        }
+        .input-group input,
+.input-group select,
+.input-group textarea {
+    margin: 10px;
+    width: 140%;
+    height: 40px; /* Adjust the height as needed */
+    border: 1px solid rgb(199, 182, 182);
+    background-color: rgb(249, 245, 245);
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.input-group textarea {
+    height: 130px; /* Adjust the height for textarea */
+}
+
+
         textarea{
             height: 20%;
         }
@@ -291,7 +255,110 @@
     margin-top: 720px;
     margin-right: -150px;
 }
+@media screen and (max-width: 900px) {
+    
+    .dot {
+            width: 14px;
+            height: 14px;
+        }
+    .learn-more-btn {
+        font-size: 12px;
+    }
+    .slider {
+        width: 80%; /* Make the slider full-width on smaller screens */
+    }
+    .content h3 {
+        font-size: 13px; /* Adjust font size for smaller screens */
+    }
+    .disc{
+        font-size: 10px;
+    }
+    nav li {
+        
+        margin: 0;
+        margin-right: 20px;
+        font-size: 14px;
+    }
 
+    nav {
+        overflow: auto;
+    }
+
+    nav a {
+        margin: 5px;
+    }
+
+    nav.show-menu li {
+        display: block;
+    }
+    .info-container {
+        flex-direction: row; /* Stack items vertically on smaller screens */
+        width: 80%; /* Make the container full-width on smaller screens */
+        
+    }
+
+    .info-text h2 {
+        font-size: 24px; /* Adjust h2 font size for smaller screens */
+    }
+
+    .info-text p {
+        font-size: 14px; /* Adjust paragraph font size for smaller screens */
+    }
+    .slider-navigation button {
+        display: block;
+        margin-top: -500px;
+        padding: 5px;
+      
+    }
+    .input-group input,
+    .input-group select,
+    .input-group textarea {
+        width: 135%; 
+        align-items: left;
+    }
+
+    .container {
+        flex-direction: row; /* Change back to horizontal for smaller screens */
+        width: 60%;
+        align-items: center;
+        margin-right: 40px;
+    }
+
+    .input-group {
+        flex-direction: column; /* Change back to vertical for smaller screens */
+        width: 100%;
+    }
+
+
+    .input-group {
+        width: 100%;
+    }
+
+    .input-group {
+        width: 80%;
+    }
+
+    .rating-slider {
+        width: 100%;
+    }
+
+    .rating-option {
+        width: 80%;
+        padding: 3%;
+        height: 80%;
+        margin: 0.5%;
+        
+    }
+
+    .submit-button {
+
+    }
+    .left-section,
+    .right-section {
+        display: none; /* Hide left and right images on smaller screens */
+    }
+
+}
     </style>
     <!-- Add your other head elements (links, scripts, etc.) here -->
     <title>Your Fitness App</title>
