@@ -205,7 +205,9 @@ img {
     height: auto; /* Set height to auto to maintain aspect ratio */
     max-height: 300px; /* Set max-height to 100% to ensure it fits within the modal content */
 }
-
+.toggle-input:checked + .toggle-slider {
+    background-color: rgba(30, 152, 215, 255);
+}
 .modal-buttons {
     display: flex;
     justify-content: space-around;
@@ -420,36 +422,38 @@ img {
         <div class="exercise-option"><a href="#">Bridge</a></div>
         <div class="exercise-option"><a href="#">Squats</a></div>
         <div class="exercise-option"><a href="#">Downward Planks</a></div>
-        <div class="exercise-option"><a href="#">Easy</a></div>
         <div class="exercise-option"><a href="#">Plum and Level</a></div>
         <div class="nav-button next">Next &#8250;</div>
     </div>
 
     <!-- New container for additional divs and buttons -->
-    <div class="additional-container">
-        <!-- New additional divs with toggle buttons -->
-        <div class="additional-option">
-            Show Colored Overlay
-            <label class="toggle-container">
-                <input type="checkbox" class="toggle-input">
-                <span class="toggle-slider"></span>
-              </label>
-        </div>
-        <div class="additional-option">
-            Show Angles on Overlay
-            <label class="toggle-container">
-                <input type="checkbox" class="toggle-input">
-                <span class="toggle-slider"></span>
-              </label>
-        </div>
-        <div class="additional-option">
-            Show Info Table
-            <label class="toggle-container">
-                <input type="checkbox" class="toggle-input">
-                <span class="toggle-slider"></span>
-              </label>
-        </div>
-
+    <!-- New container for additional divs and buttons -->
+    <div class="additional-option">
+        Show Colored Overlay
+        <label class="toggle-container">
+            <input type="checkbox" class="toggle-input" onchange="updateToggleValue(this, 'toggle-value-1')">
+            <span class="toggle-slider"></span>
+        </label>
+        <input type="hidden" id="toggle-value-1" value="0">
+    </div>
+    
+    <div class="additional-option">
+        Show Angles on Overlay
+        <label class="toggle-container">
+            <input type="checkbox" class="toggle-input" onchange="updateToggleValue(this, 'toggle-value-2')">
+            <span class="toggle-slider"></span>
+        </label>
+        <input type="hidden" id="toggle-value-2" value="0">
+    </div>
+    
+    <div class="additional-option">
+        Show Info Table
+        <label class="toggle-container">
+            <input type="checkbox" class="toggle-input" onchange="updateToggleValue(this, 'toggle-value-3')">
+            <span class="toggle-slider"></span>
+        </label>
+        <input type="hidden" id="toggle-value-3" value="0">
+    </div>
         <div class="additional-buttons">
             <button class="blue-button">Show Sample Exercise</button>
             <button class="blue-button">Show Sample Demo</button>
@@ -621,7 +625,27 @@ sampleExerciseButton.addEventListener('click', function () {
 
             option.classList.add('clicked');
         }
-        
+        function updateToggleValue(toggle, inputId) {
+    const toggleValueInput = document.getElementById(inputId);
+    if (toggle.checked) {
+        toggleValueInput.value = "1"; // Set value to 1 when toggle is checked
+    } else {
+        toggleValueInput.value = "0"; // Set value to 0 when toggle is unchecked
+
+    }
+    printToggleValues();
+}
+
+// Function to print the values of the hidden input fields
+function printToggleValues() {
+    const toggleValues = [];
+    const toggleValueInputs = document.querySelectorAll('input[type="hidden"]');
+    toggleValueInputs.forEach(function(input) {
+        toggleValues.push(input.value);
+    });
+    console.log(toggleValues);
+    console.log("hello world")
+}
     </script>
     </body>
 </html>

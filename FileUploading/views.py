@@ -90,6 +90,8 @@ def feedback(request):
 
 @gzip.gzip_page
 def live_feed(request):
+
+
     return StreamingHttpResponse(generate_frames(), content_type="multipart/x-mixed-replace;boundary=frame")
 
 

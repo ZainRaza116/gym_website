@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <style>
         body.loading {
             visibility: hidden;
@@ -70,7 +71,7 @@ img {
 
 
 .slider {
-    width: 80%;
+    width: 85%;
     margin: 20px auto; /* Center the slider */
     overflow: hidden; /* Hide overflowing content */
 }
@@ -118,12 +119,12 @@ img {
             color: #004477;
         }
         .content h3 {
-    color: grey;
+    color: #8C8C8C;
     font-size: 25px;
 }
 
 h3 {
-    color: grey;
+    color: #8C8C8C;
     font-size: 25px;
     text-align: left; /* Center the text */
 }
@@ -149,8 +150,11 @@ h3 {
     font-size: 32px; /* Set the default font size for h2 */
 }
 
-.info-text p {
-    font-size: 16px; /* Set the default font size for paragraphs */
+.info-text {
+    flex: 1;
+    padding: 20px;
+    text-align: left; 
+    font-size: 20px;
 }
 
 .info-image {
@@ -197,19 +201,19 @@ h3 {
     }
 
     .slick-dots .slick-active {
-        color: #0f2633;
+        color: #e6e6e6;
     }
     
     .dot-container {
             text-align: center;
-            margin-top: 20px;
+            margin-top: -34px;
         }
 
         .dot {
             display: inline-block;
-            width: 20px;
-            height: 20px;
-            background-color: #bbb;
+            width: 15px;  /* Adjust the width to your desired size */
+    height: 15px; /* Adjust the height to your desired size */
+            background-color: #D7D7D7;
             border-radius: 50%;
             margin: 0 5px;
             cursor: pointer;
@@ -296,19 +300,27 @@ h3 {
     }
 
     .info-text p {
-        font-size: 14px; /* Adjust paragraph font size for smaller screens */
-    }
+    font-size: 20px;
+    text-align: left;
+}
     .slider-navigation button {
         display: block;
         margin-top: -500px;
         padding: 5px;
       
     }
-
+    .dot.active {
+    background-color: yellow !important; /* Or any other desired color */
+    /* Other styles */
 }
-@media screen and (m-width: 100px) {
+
+.info-text {
+    text-align: left;
+}
+}
+@media screen and (max-width: 100px) {
     .slider-navigation button {
-        margin-top: -250px; /* Adjust this value for middle range vertical alignment */
+        margin-top: -250px; 
     }
 }
     </style>
@@ -339,103 +351,106 @@ h3 {
         <img class="profile-logo" src="images/user (1).png" alt="Profile Logo">
     </header>
     <div class="slider">
-        <div class="slide">
+        <div class="slide" >
             <div class="content">
-                <img class="imagess" src="images/fortune-vieyra-jD4MtXnsJ6w-unsplash.jpg" alt="Image 1">
 
-                <h3>Feature #2</h3>
-                <p class="disc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore et eos iusto animi quisquam asperiores quia, Lorem ipsum
-                </p>
-                <a href="#" class="learn-more-btn">Learn More</a>
+                <img class="imagess" src="images/fortune-vieyra-jD4MtXnsJ6w-unsplash.jpg" alt="Image 1">
+                <!-- Change the src attribute above to the URL of your first image -->
+                <h3>Real-Time Feedback</h3>
+                <p class="disc">Posture improvement through real-time bio-feedback overlay</p>
+                <a href="#" class="learn-more-btn" data-index="2">Learn More</a>
             </div>
         </div>
         <div class="slide">
             <div class="content">
                 <img class="imagess" src="images/james-barr-uNyv2CdcdSY-unsplash.jpg" alt="Image 1" >
-                <h3>Feature #3</h3>
-                <p class="disc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore et eos iusto animi quisquam asperiores quia, Lorem ipsum
+                <h3>Recommendations</h3>
+                <p class="disc"> Using AI technology, geobalance suggests improvements through a livefeedback interface.
                 </p>
-                <a href="#" class="learn-more-btn">Learn More</a>
+                <a href="#" class="learn-more-btn" data-index="3">Learn More</a>
             </div>
         </div>
         <div class="slide">
             <div class="content">
                 <img class="imagess" src="images/james-barr-ULqD07i0l7s-unsplash.jpg" alt="Image 1" >
-                <h3>Feature #4</h3>
-                <p class="disc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore et eos iusto animi quisquam asperiores quia, Lorem ipsum
+                <h3>Video-on Demand
+                </h3>
+                <p class="disc">Users can review their previous workouts and understand how well they have
+                    performed.
                 </p>
-                <a href="#" class="learn-more-btn">Learn More</a>
+                <a href="#" class="learn-more-btn" data-index="4">Learn More</a>
             </div>
         </div>
         <div class="slide">
             <div class="content">
                 <img class="imagess" src="images/connor-bowden-KgWaohVS-mc-unsplash.jpg" alt="Image 1" >
-                <h3>Feature #5</h3>
-                <p class="disc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore et eos iusto animi quisquam asperiores quia, Lorem ipsum
+                <h3>Automated Reports</h3>
+                <p class="disc">Geobalance reports 
                 </p>
-                <a href="#" class="learn-more-btn">Learn More</a>
+                <a href="#" class="learn-more-btn" data-index="5">Learn More</a>
             </div>
         </div>
         <div class="slide">
             <div class="content">
                 <img class="imagess" src="images/tim-foster-Odhl-kitI2c-unsplash.jpg" alt="Image 1" >
-                <h3>Feature #6</h3>
-                <p class="disc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore et eos iusto animi quisquam asperiores quia, Lorem ipsum
+                <h3>Regulation Compliant</h3>
+                <p class="disc"> Geobalance software is built to comply with federal and local regulations
                 </p>
-                <a href="#" class="learn-more-btn">Learn More</a>
+                <a href="#" class="learn-more-btn" data-index="6">Learn More</a>
             </div>
         </div>
         <div class="slide">
             <div class="content">
                 <img clas="imagess"src="images/fortune-vieyra-jD4MtXnsJ6w-unsplash.jpg" alt="Image 1">
-                <h3>Feature #7</h3>
-                <p class="disc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore et eos iusto animi quisquam asperiores quia, Lorem ipsum
+                <h3>Gamification</h3>
+                <p class="disc">Improved exercise experience by increasing enhancement through the
+                    application of game elements.
                 </p>
-                <a href="#" class="learn-more-btn">Learn More</a>
+                <a href="#" class="learn-more-btn" data-index="7">Learn More</a>
             </div>
         </div>
         <div class="slide">
             <div class="content">
                 <img class="imagess" src="images/james-barr-uNyv2CdcdSY-unsplash.jpg" alt="Image 1" >
-                <h3>Feature #8</h3>
-                <p class="disc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore et eos iusto animi quisquam asperiores quia, Lorem ipsum
+                <h3>Web 4.0 Ready</h3>
+                <p class="disc">Geobalance can be further expanded through inclusion of virtual worlds and
+                    avatars and share with others
                 </p>
-                <a href="#" class="learn-more-btn">Learn More</a>
+                <a href="#" class="learn-more-btn" data-index="8">Learn More</a>
             </div>
         </div>
         <div class="slide">
             <div class="content">
                 <img class="imagess" src="images/james-barr-ULqD07i0l7s-unsplash.jpg" alt="Image 1" >
-                <h3>Feature #9</h3>
-                <p class="disc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore et eos iusto animi quisquam asperiores quia, Lorem ipsum
+                <h3>Long-Term development</h3>
+                <p class="disc">Robotics and AI Diagnostics Recommendations for Medical Intervention
                 </p>
-                <a href="#" class="learn-more-btn">Learn More</a>
+                <a href="#" class="learn-more-btn" data-index="9">Learn More</a>
             </div>
         </div>
         <div class="slide">
             <div class="content">
                 <img class="imagess" src="images/james-barr-uNyv2CdcdSY-unsplash.jpg" alt="Image 1" >
-                <h3>Feature #1</h3>
-                <p class="disc">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore et eos iusto animi quisquam asperiores quia, Lorem ipsum
+                <h3>Motion Capture
+                </h3>
+                <p class="disc">Through advanced motion-capture technology, geobalance records user
+movements.
                 </p>
-                <a href="#" class="learn-more-btn">Learn More</a>
+                <a href="#" class="learn-more-btn" data-index="1">Learn More</a>
             </div>
         </div>
 
      </div>
      <div class="slider-navigation">
-        <button class="dot" onclick="showGroup(currentSlide - 1)">❮</button>
-        <button class="dot" onclick="showGroup(currentSlide + 1)">❯</button>
+        <button class="dot" onclick="moveSlide(-1)">❮</button>
+        <button class="dot" onclick="moveSlide(1)">❯</button>
+        
     </div>
      <div class="dot-container">
-        <div class="dot active" onclick="showGroup(0)"></div>
-        <div class="dot" onclick="showGroup(1)"></div>
-        <div class="dot" onclick="showGroup(2)"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
     </div>
-    <!-- Optional: Navigation buttons -->
-<!-- Optional: Navigation buttons -->
-
-
 
 
 
@@ -445,9 +460,9 @@ h3 {
         <img src="images/victor-freitas-WvDYdXDzkhs-unsplash.jpg" alt="Full-size Image">
     </div>
     <div class="info-text">
-    
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex voluptate quo maxime ipsam laborum quia porro nisi fuga, in et unde est sequi distinctio quas nam repellendus eius veniam? Quisquam! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, excepturi doloremque eligendi odit maxime beatae quibusdam sapiente alias, quidem, eius velit accusantium dignissimos. Vero a, consectetur saepe voluptatem quas cum?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt aspernatur nihil amet ex voluptates itaque nobis laborum consequuntur aliquid cupiditate inventore perspiciatis numquam beatae, totam repudiandae officia commodi iusto a.</p>
+        <p id="info-text">Through advanced motion-capture technology, geobalance records user</p>
     </div>
+    
 </div>
 
 </div>
@@ -456,20 +471,145 @@ h3 {
 <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
 <script>
-    $(document).ready(function(){
-        $('.slider').slick({
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            autoplay: false,
-            centerMode: true,
-            focusOnSelect: true,
-        });
+function moveSlide(direction) {
+    const slidesToShow = 3; // Number of slides to show in each group
+    const totalSlides = $('.slider').slick('getSlick').slideCount;
+    const maxGroups = Math.ceil(totalSlides / slidesToShow);
+    let newGroup;
+    
+    if (direction === -1) {
+        newGroup = (currentSlide - 1 < 0) ? maxGroups - 1 : Math.floor((currentSlide - 1) / slidesToShow);
+    } else {
+        newGroup = (currentSlide + slidesToShow >= totalSlides) ? 0 : Math.floor((currentSlide + slidesToShow) / slidesToShow);
+    }
+
+    showGroup(newGroup);
+}
+
+$(document).ready(function () {
+    $('.slide').first().on('click', function(event) {
+    event.stopPropagation();
+});
+
+$('.slide').last().on('click', function(event) {
+    event.stopPropagation();
+});
+    $('.slider').slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: false,
+        centerMode: true,
+        focusOnSelect: true,
+        centerPadding: '0', // Adjust this value as needed
+        
     });
 
-    function showGroup(groupNumber) {
-        var startIndex = groupNumber * 3;
-        $('.slider').slick('slickGoTo', startIndex);
+    
+    $('.learn-more-btn').on('click', function () {
+    event.stopPropagation();
+    event.preventDefault(); 
+    const dataIndex = $(this).data('index');
+    const longDescription = getLongDescription(dataIndex);
+    const imageUrl = getImageUrl(dataIndex); // Call a function to get the corresponding image URL
+
+    // Update the info text with the corresponding long description
+    $('#info-text').text(longDescription);
+    $('.info-image img').attr('src', imageUrl); // Update the image source
+});
+
+    function getImageUrl(index) {
+    switch (index) {
+        case 1:
+            return "images/james-barr-uNyv2CdcdSY-unsplash.jpg"; // Change this to the URL of your desired image for index 1
+        case 2:
+            return "images/fortune-vieyra-jD4MtXnsJ6w-unsplash.jpg"; // Change this to the URL of your desired image for index 2
+        // Add cases for other indices as needed
+        case 3:
+            return "images/james-barr-uNyv2CdcdSY-unsplash.jpg"; // Default image URL if no specific image is provided
+        case 4:
+            return "images/james-barr-ULqD07i0l7s-unsplash.jpg"; 
+        case 5:
+            return "images/connor-bowden-KgWaohVS-mc-unsplash.jpg"; 
+        case 6:
+            return "images/tim-foster-Odhl-kitI2c-unsplash.jpg"; 
+        case 7:
+            return "images/fortune-vieyra-jD4MtXnsJ6w-unsplash.jpg"; 
+        case 8:
+            return "images/james-barr-uNyv2CdcdSY-unsplash.jpg"; 
+        case 9:
+            return "images/james-barr-ULqD07i0l7s-unsplash.jpg"; 
     }
+}
+    function getLongDescription(index) {
+    // Replace the following switch statement with your actual long descriptions
+    switch (index) {
+        case 1:
+            return "Using advanced trackerless motion-capture technology, geobalance records and displays user information when engaging in physical activities such as exercises in sports or physical therapy settings.";
+        case 2:
+            return "Posture improvement through real-time bio-feedback overlay. Socrates states “above all know thyself”, geobalance provides users with tools to observe their posture and review how they are performing their exercises.";
+
+        case 3:
+            return "Using AI technology, geobalance suggests improvements through a live feedback interface including visual (overlay on top of the user, informational table) and audio (verbal instructions, positive reinforcement through motivational feedback) cues.";
+        case 4:
+            return "Geobalance provides users with the ability to review recordings and images of their previous workout whenever and wherever they want. This feature allow users to review their past form and be able to evaluate their progress over time.";
+        case 5:
+            return "Geoblance reports can be tailored to the needs of the end-user, medical professional, and insurance providers. For the end user, reports would be tailored towards future improvements. For the medical professional, reports can serve to guide future treatment improvements. And for insurance providers, geobalance reports can automatically document patient progress over time thus saving significant time for the medical professional.";
+        case 6:
+            return " In addition to the standard regulations for safekeeping of medical records as required by the HIPAA standard, when Geobalance is used in a medical setting, all visual recordings will be compliant as well. ";
+        case 7:
+            return "Geobalance provides users with an enhanced experience by creating a game-like-environment where users can socialize, learn, compete, and achieve multiple milestones within the system. For example, geobalance will implement a badge and leaderboards system, and in addition to promoting weekly challenges for users to compete against themselves or with others."
+        case 8:
+            return "Ever wanted to workout in the Bahamas, how about working out in Space? With Geobalance, you can not only choose where to workout, but also with whom, including any of your favorite celebrities like the Rock or Vin Diesel. Even better, you could share these experiences with other users"
+        case 9:
+            return "Geobalance could be further extended to work with robots and other machinery to provide additional physical support for users through physical adjustment while exercising. In addition, by further extending the capabilities of Geobalance’s AI algorithm within the physical therapy realm, we envision Geobalance being able to provide more complex recommendations including suggesting supplemental exercises. Beyond physical therapy, Geobalance AI algorithm will be able to coach users by creating a personalized exercise remine tailored to their physical needs. Further extending the AI capabilities of Geobalance, we envision the use of physiological data (age, weight, height), biological data (blood pressure, breath rate) and observable data (skin tone, eye iris) to provide more complex diagnostics for the user."
+    }
+}
+
+    // Handle arrow button click events
+    $('.slider-navigation button').on('click', function () {
+        if ($(this).hasClass('prev')) {
+            $('.slider').slick('slickPrev');
+        } else if ($(this).hasClass('next')) {
+            $('.slider').slick('slickNext');
+        }
+    });
+        // Update currentSlide on afterChange event
+        $('.slider').on('afterChange', function (event, slick, currentSlide) {
+        updateCurrentSlide(currentSlide);
+    });
+    // Function to update currentSlide variable
+function updateCurrentSlide(index) {
+    currentSlide = index;
+}
+});
+
+function showGroup(groupNumber) {
+    const slidesToShow = 3; // Number of slides to show in each group
+    const totalSlides = $('.slider').slick('getSlick').slideCount;
+    const maxGroups = Math.ceil(totalSlides / slidesToShow);
+    
+    if (groupNumber < 0) {
+        groupNumber = maxGroups - 1;
+    } else if (groupNumber >= maxGroups) {
+        groupNumber = 0;
+    }
+
+    const startIndex = groupNumber * slidesToShow;
+    $('.slider').slick('slickGoTo', startIndex);
+
+    // Update the active dot
+    const dots = document.querySelectorAll('.dot');
+    dots.forEach((dot, index) => {
+        if (index === groupNumber) {
+            dot.classList.add('active');
+        } else {
+            dot.classList.remove('active');
+        }
+    });
+
+
+}
+
 
     let currentSlide = 0;
 
@@ -490,6 +630,13 @@ h3 {
         slider.style.transition = 'transform 0.5s ease-in-out';
         slider.style.transform = 'translateX(' + offset + ')';
     }
+
+    $('.slider').on('afterChange', function (event, slick, currentSlide) {
+    console.log("Slider changed to slide #" + currentSlide);
+    $('.dot').removeClass('active'); // Remove active class from all dots
+    $('.dot').eq(currentSlide).addClass('active'); // Add active class to the dot corresponding to the current slide
+});
+
 
     function removeLoadingClass() {
         document.body.classList.remove('loading');
