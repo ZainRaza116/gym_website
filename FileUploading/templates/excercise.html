@@ -458,11 +458,11 @@ img {
             <button class="blue-button">Show Sample Exercise</button>
             <button class="blue-button">Show Sample Demo</button>
             <button class="blue-button">Start Feedback</button>
+        <!-- </div>
+        <div id="live-camera-feed">
+            <video id="webcam-video" class="live-camera-feed" autoplay></video>
         </div>
-        <div id="live-camera-feed" >
-            <img src="{% url 'live_feed' %}" class="live-camera-feed"alt="Camera Feed">
-        </div>
-    </div>
+    </div> -->
 </div>
     <div class="modal">
         <div class="modal-content">
@@ -490,6 +490,46 @@ img {
         </div>
     </div>
             </div>
+            <script>
+            async function startWebcam() {
+                const webcamVideo = document.getElementById('webcam-video');
+                // JavaScript
+                const websocket = new WebSocket('ws://$(window.location.host)/ws/socket-server/');
+
+            
+                // Check if the browser supports accessing the user's camera
+                if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                    try {
+                        const stream = await navigator.mediaDevices.getUserMedia({ video: true }); // Access the user's camera
+                        webcamVideo.srcObject = stream; // Set the stream as the source for the video element
+            
+                        // Event listener to send frames to the server whenever a new frame is available
+                        webcamVideo.addEventListener('play', function () {
+                            setInterval(async () => {
+                                // Capture the current frame from the video element as an image
+                                const canvas = document.createElement('canvas');
+                                canvas.width = webcamVideo.videoWidth;
+                                canvas.height = webcamVideo.videoHeight;
+                                canvas.getContext('2d').drawImage(webcamVideo, 0, 0, canvas.width, canvas.height);
+                                const frameData = canvas.toDataURL('image/jpeg');
+            
+                                // Send the frame data to the server via WebSocket
+                                websocket.send(JSON.stringify({ frame: frameData }));
+                            }, 1000 / 30); // Send frames at approximately 30 frames per second
+                        });
+                    } catch (error) {
+                        console.error('Error accessing camera:', error);
+                    }
+                } else {
+                    console.error('getUserMedia not supported in this browser');
+                }
+            }
+            
+            // Call the function to start the webcam when the DOM content is loaded
+            document.addEventListener('DOMContentLoaded', function () {
+                startWebcam();
+            });
+        </script>
             <!-- <script>
                 document.addEventListener('DOMContentLoaded', function () {
                     const liveCameraFeedContainer = document.getElementById('live-camera-feed');

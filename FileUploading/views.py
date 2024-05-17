@@ -10,13 +10,14 @@ import cv2
 import numpy as np
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import  permissions
-from .test import generate_frames
+# from .test import generate_frames
 from django.http import StreamingHttpResponse
 from django.views.decorators import gzip
 from django.shortcuts import render
-
-
-
+from rest_framework.views import APIView
+from rest_framework.response import Response
+import openai
+from rest_framework import status
 def FileUploading(request):
         if request.method == "POST":
             email = request.POST.get("email")
@@ -68,6 +69,8 @@ def getFeedbackMessage(value):
         return "Love"
 
 def feedback(request):
+    feed = Feedback.objects.all()
+    print(feed)
     if request.method == 'POST':
         demo_rating_value = int(request.POST.get('demo_rating', 4))
         subject = request.POST.get('subject', '')
@@ -88,12 +91,9 @@ def feedback(request):
     return render(request, "feedback.html")
 
 
-@gzip.gzip_page
-def live_feed(request):
-
-
-    return StreamingHttpResponse(generate_frames(), content_type="multipart/x-mixed-replace;boundary=frame")
-
+# @gzip.gzip_page
+# def live_feed(request):
+#     return StreamingHttpResponse(generate_frames(), content_type="multipart/x-mixed-replace;boundary=frame")
 
 def excercise(request):
     return render(request, 'excercise.html')
