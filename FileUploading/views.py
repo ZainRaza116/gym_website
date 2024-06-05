@@ -6,8 +6,7 @@ from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
 from .models import *
 from django.http import JsonResponse
-import cv2
-import numpy as np
+
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import  permissions
 # from .test import generate_frames
@@ -16,7 +15,6 @@ from django.views.decorators import gzip
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
-import openai
 from rest_framework import status
 def FileUploading(request):
         if request.method == "POST":

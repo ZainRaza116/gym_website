@@ -1,15 +1,15 @@
-# consumers.py
 import asyncio
 from channels.generic.websocket import AsyncWebsocketConsumer
+import time
 
-class CameraConsumer(AsyncWebsocketConsumer):
+class VideoConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         await self.accept()
-
-    async def receive(self, text_data):
-        # Process received frame
-        # You can save it to a file, perform analysis, etc.
-        print('Received frame:', text_data)
+        print("WebSocket connection established")
+        self.last_frame_time = None
 
     async def disconnect(self, close_code):
-        pass  # Clean up if needed
+        print("WebSocket connection closed")
+
+    async def receive(self, text_data=None, bytes_data=None):
+        print(text_data)
