@@ -1,7 +1,7 @@
 # routing.py
 from django.urls import path
-from FileUploading.consumers import VideoConsumer
+from FileUploading.consumers import CameraConsumer
 
 websocket_urlpatterns = [
-    path('ws/video/', VideoConsumer.as_asgi()),
+    path('ws/video/', CameraConsumer.as_asgi()),
 ]

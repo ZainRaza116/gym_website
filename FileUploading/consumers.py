@@ -1,15 +1,43 @@
-import asyncio
+# views.py
+import cv2
+import numpy as np
+from django.http import StreamingHttpResponse
+from django.views.decorators import gzip
 from channels.generic.websocket import AsyncWebsocketConsumer
-import time
+import json
+import base64
 
-class VideoConsumer(AsyncWebsocketConsumer):
+class CameraConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         await self.accept()
-        print("WebSocket connection established")
-        self.last_frame_time = None
 
     async def disconnect(self, close_code):
-        print("WebSocket connection closed")
+        pass
 
-    async def receive(self, text_data=None, bytes_data=None):
-        print(text_data)
+    async def receive(self, text_data):
+        text_data_json = json.loads(text_data)
+        frame_data = text_data_json['frame']
+        
+        # Decode the base64 image
+        frame_bytes = base64.b64decode(frame_data.split(',')[1])
+        np_arr = np.frombuffer(frame_bytes, np.uint8)
+        frame = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
+        
+        # Apply the image_set filter
+        processed_frame = self.image_set(frame)
+        
+        # Encode the processed frame back to base64
+        _, buffer = cv2.imencode('.jpg', processed_frame)
+        processed_frame_data = base64.b64encode(buffer).decode('utf-8')
+        
+        # Send the processed frame back to the client
+        await self.send(text_data=json.dumps({
+            'processed_frame': f'data:image/jpeg;base64,{processed_frame_data}'
+        }))
+
+    def image_set(self, img):
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) 
+        equ = cv2.equalizeHist(gray) 
+        blurred = cv2.GaussianBlur(src=equ, ksize=(3, 5), sigmaX=0.5) 
+        edges = cv2.Canny(blurred, 70, 135) 
+        return edges

@@ -385,6 +385,24 @@ img {
     height: inherit;
 
 }
+#webcam-video {
+            position: absolute; /* Removes the element from the document flow */
+            opacity: 0; /* Makes the element invisible */
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            display: none !important;
+            pointer-events: none; /* Prevents the element from being interacted with */
+        }
+
+        .live-camera-feed {
+            width: 100%; /* Make it responsive by using percentage width */
+            max-width: 774px; /* Set a maximum width if needed */
+            height: auto; /* Maintain the aspect ratio */
+            border: 1px solid #ccc;
+            margin-top: -1px;
+            margin-left: -1px;
+        }
 
 }
 
@@ -393,7 +411,8 @@ img {
 
     <meta charset="UTF-8">
     <script src="https://www.youtube.com/iframe_api"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha256-QRERsJdf1p08zKl91foxx/+G/J9Fb7ilhKAlcMU9BfE=" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
@@ -460,7 +479,8 @@ img {
             <button class="blue-button">Start Feedback</button>
         </div>
         <div id="live-camera-feed">
-            <video id="webcam-video" class="live-camera-feed" autoplay></video>
+            <video style="display: none;" id="webcam-video" autoplay></video>
+            <canvas id="processed-video" class="live-camera-feed"></canvas>
         </div>
     </div>
 </div>
@@ -490,41 +510,44 @@ img {
         </div>
     </div>
             </div>
-            <script>
+   <script>
 async function startWebcam() {
     const webcamVideo = document.getElementById('webcam-video');
+    const processedCanvas = document.getElementById('processed-video');
+    const ctx = processedCanvas.getContext('2d');
     const websocket = new WebSocket('ws://127.0.0.1:8001/ws/video/');
 
-    websocket.onopen = () => {
-        console.log("WebSocket connection established");
-    };
-
-    websocket.onclose = () => {
-        console.log("WebSocket connection closed");
-    };
-
-    // Check if the browser supports accessing the user's camera
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         try {
-            const stream = await navigator.mediaDevices.getUserMedia({ video: true }); // Access the user's camera
-            webcamVideo.srcObject = stream; // Set the stream as the source for the video element
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            webcamVideo.srcObject = stream;
 
-            // Event listener to send frames to the server whenever a new frame is available
-            webcamVideo.addEventListener('play', function () {
-                setInterval(() => {
-                    // Capture the current frame from the video element as an image
-                    const canvas = document.createElement('canvas');
-                    canvas.width = webcamVideo.videoWidth;
-                    canvas.height = webcamVideo.videoHeight;
-                    const context = canvas.getContext('2d');
-                    context.drawImage(webcamVideo, 0, 0, canvas.width, canvas.height);
-
-                    // Get the image data
-                    const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-                    const pixelArray = Array.from(imageData.data); 
-                    websocket.send(JSON.stringify({ frame: pixelArray, width: canvas.width, height: canvas.height }));
-                }, 1000 / 1000); 
+            webcamVideo.addEventListener('loadedmetadata', function() {
+                processedCanvas.width = webcamVideo.videoWidth;
+                processedCanvas.height = webcamVideo.videoHeight;
             });
+
+            webcamVideo.addEventListener('play', function () {
+                const sendFrame = () => {
+                    if (webcamVideo.paused || webcamVideo.ended) return;
+                    ctx.drawImage(webcamVideo, 0, 0);
+                    const frameData = processedCanvas.toDataURL('image/jpeg');
+                    websocket.send(JSON.stringify({ frame: frameData }));
+                    setTimeout(sendFrame, 150); 
+                };
+                sendFrame();
+            });
+
+            websocket.onmessage = function(event) {
+                const data = JSON.parse(event.data);
+                if (data.processed_frame) {
+                    const img = new Image();
+                    img.onload = function() {
+                        ctx.drawImage(img, 0, 0, processedCanvas.width, processedCanvas.height);
+                    }
+                    img.src = data.processed_frame;
+                }
+            };
         } catch (error) {
             console.error('Error accessing camera:', error);
         }
@@ -532,12 +555,11 @@ async function startWebcam() {
         console.error('getUserMedia not supported in this browser');
     }
 }
-            
-            // Call the function to start the webcam when the DOM content is loaded
-            document.addEventListener('DOMContentLoaded', function () {
-                startWebcam();
-            });
-        </script>
+
+document.addEventListener('DOMContentLoaded', function () {
+    startWebcam();
+});
+    </script>
             <!-- <script>
                 document.addEventListener('DOMContentLoaded', function () {
                     const liveCameraFeedContainer = document.getElementById('live-camera-feed');

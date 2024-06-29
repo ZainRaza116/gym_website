@@ -1,27 +1,26 @@
-# import cv2 
-# import numpy as np 
-  
+# test.py
+import asyncio
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
 
-# def image_set(img):
-#     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) 
-#     equ = cv2.equalizeHist(gray) 
-#     blurred = cv2.GaussianBlur(src=equ, ksize=(3, 5), sigmaX=0.5) 
-#     edges = cv2.Canny(blurred, 70, 135) 
-#     return edges
+def process_frame(frame):
+    # Your frame processing logic here
+    print(f"Processing frame: {frame}")
 
-# cap = cv2.VideoCapture(0)
+def receive_frames():
+    channel_layer = get_channel_layer()
+    
+    def frame_received(event):
+        frame = event["frame"]
+        process_frame(frame)
 
-# def generate_frames():
-#     while True:
-#         success, frame = cap.read()
-#         if not success:
-#             break
-#         else:
-#             frame_array = np.array(frame)
-        
+    async_to_sync(channel_layer.group_add)("camera_frames", "test_consumer")
+    
+    try:
+        while True:
+            async_to_sync(channel_layer.receive)("test_consumer")
+    except KeyboardInterrupt:
+        async_to_sync(channel_layer.group_discard)("camera_frames", "test_consumer")
 
-#             _, buffer = cv2.imencode('.jpg', frame)
-#             frame_bytes = buffer.tobytes()
-
-#             yield (b'--frame\r\n'
-#                    b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
+if __name__ == "__main__":
+    receive_frames()
