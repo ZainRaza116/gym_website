@@ -515,7 +515,7 @@ async function startWebcam() {
     const webcamVideo = document.getElementById('webcam-video');
     const processedCanvas = document.getElementById('processed-video');
     const ctx = processedCanvas.getContext('2d');
-    const websocket = new WebSocket('ws://127.0.0.1:8001/ws/video/');
+    const websocket = new WebSocket('ws://127.0.0.1:8000/ws/video/');
 
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         try {
