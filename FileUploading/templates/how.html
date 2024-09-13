@@ -4,8 +4,13 @@
     <!-- Your existing head content -->
 
     <style>
+
+    .container, .step-container, .info-container {
+        width: 90%; /* Ensure consistent width */
+        margin: 0 auto; /* Center the container horizontally */
+}
         .info-container {
-            position: fixed;
+            position: relative;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -40%);
@@ -14,6 +19,8 @@
             display: flex;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Adjust the shadow as needed */
         }
+         
+    
         .container {
   
     max-width: 1100px;
@@ -25,22 +32,29 @@
             padding: 20px;
             overflow-y: auto;
             max-height: 100%;
+            
         }
 
         .info-image {
+            
             width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             overflow: hidden;
         }
 
         .info-image img {
             width: 100%;
-            height: 100%;
+            height: auto;
             object-fit: cover;
         }
         body {
-            margin: 0;
-            font-family: 'Arial', sans-serif;
-        }
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    min-height: 100vh; /* Ensure body takes up at least the full viewport height */
+    overflow: auto; /* Enable scrollbars if content overflows */
+}
 
         .container {
     max-width: 1100px;
@@ -143,9 +157,10 @@ img {
     color: grey;
     display: inline-block;
     background-color: white;
-    margin-left: -136px;
+    
     top: -1%;
     transition: background-color 0.3s ease;
+    text-align: center; 
 }
 .step.active,
         .step.active .step-text {
@@ -236,6 +251,7 @@ img {
     .info-text,
     .info-image {
         width: 100%; /* Full width on smaller screens */
+        text-align:left;
     }
 
 }
