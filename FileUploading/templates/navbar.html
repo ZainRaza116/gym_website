@@ -41,7 +41,9 @@
         display: flex;
         font-size: 17px;
         flex-wrap: wrap;
-        justify-content: center; /* Center the items in the navigation */
+        justify-content: center;
+        align-items: center; 
+        width: 100%;
       }
 
       nav li {
@@ -82,8 +84,13 @@
         border-radius: 5px;
       }
 
+      
+
       .content {
         padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
       }
 
       .learn-more-btn {
@@ -94,8 +101,15 @@
         text-decoration: none;
         display: inline-block;
         border-radius: 5px;
-        margin-top: 10px;
+        margin-top: 0px; 
+
       }
+      .disc, .learn-more-btn {
+         display: inline-block;
+         vertical-align: middle; /* Ensures they align on the same baseline */
+}
+
+
 
       .learn-more-btn:hover {
         background-color: #f2f2f2;
@@ -122,12 +136,13 @@
       h3 {
         color: #8c8c8c;
         font-size: 25px;
-        text-align: left; /* Center the text */
+        text-align: left; 
       }
       .disc {
         font-size: 12px;
         color: grey;
         text-align: left;
+        min-height: 45px;
       }
       .info-container {
         position: relative;
@@ -135,7 +150,13 @@
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
         width: 80%;
         display: flex; /* Use flexbox for better alignment */
+        overflow: hidden;
+        height: 400px; 
+        border: 2px solid black;
+        border-radius: 5px;
       }
+
+  
 
       .info-text {
         flex: 1;
@@ -151,6 +172,15 @@
         padding: 20px;
         text-align: left;
         font-size: 20px;
+        overflow-y: auto;
+         max-height: 100%;
+      }
+    .info-text::-webkit-scrollbar {
+        width: 8px;
+      }
+      .info-text::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.2);
+          border-radius: 10px;
       }
 
       .info-image {
@@ -203,7 +233,7 @@
 
       .dot-container {
         text-align: center;
-        margin-top: -34px;
+        margin-top: 20px;
       }
 
       .dot {
@@ -300,6 +330,7 @@
           font-size: 20px;
           text-align: left;
         }
+    
         .slider-navigation button {
           display: block;
           margin-top: -500px;
@@ -477,7 +508,7 @@
               src="images/james-barr-ULqD07i0l7s-unsplash.jpg"
               alt="Image 1"
             />
-            <h3>Long-Term development</h3>
+            <h3>Development</h3>
             <p class="disc">
               Robotics and AI Diagnostics Recommendations for Medical
               Intervention
