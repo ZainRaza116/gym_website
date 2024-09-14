@@ -111,23 +111,32 @@
             align-items: center;
 
         }
-
-        .input-group input,
-        .input-group select,
-        .input-group textarea {
-            margin: 10px;
-            width: 140%;
-            height: 40px;
-            /* Adjust the height as needed */
+        
+        .input-group select{
+            width: 142%;
+            height: 40px; /* Same height for inputs */
+            margin: 10px; /* Align center */
+            padding: 2px; /* Add padding for spacing */
             border: 1px solid rgb(199, 182, 182);
-            background-color: rgb(249, 245, 245);
             border-radius: 4px;
+            background-color: rgb(249, 245, 245);
+            font-size: 16px;
+        }
+        .input-group input,
+        .input-group textarea {
+            width: 140%; 
+            height: 40px; 
+            margin: 10px; 
+            padding: 2px; 
+            border: 1px solid rgb(199, 182, 182);
+            border-radius: 4px;
+            background-color: rgb(249, 245, 245);
             font-size: 16px;
         }
 
         .input-group textarea {
-            height: 130px;
-            /* Adjust the height for textarea */
+            height: 140px;
+            
         }
 
 
@@ -178,27 +187,33 @@
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
-            width: 110%;
-            margin: 20px auto;
+            width: 140%;
+            
+            text-align: left;
         }
+   
 
+    .ratings-label{
+        margin-left: 200px;
+        margin-bottom: 20px;
+    }
         .rating-slider {
             margin-top: 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             width: 170%;
-            /* Adjust the width as needed */
+           
             margin: 10 auto;
-            /* Center the slider within the container */
+            
         }
 
         .rating-slider-container {
             position: relative;
             display: flex;
-            /* Make the container a flex container */
+        
             align-items: center;
-            /* Center items vertically in the container */
+           
             margin-top: 30px;
         }
 
@@ -218,6 +233,8 @@
             /* Adjust the height as needed */
         }
 
+    
+
 
         .rating-option {
             width: 40px;
@@ -227,7 +244,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-top: 20px;
+            margin-top: 20px auto;
             cursor: pointer;
             transition: background-color 0.3s, color 0.3s, border-color 0.3s;
             user-select: none;
@@ -235,13 +252,15 @@
             -ms-user-select: none;
             -webkit-user-select: none;
         }
+        
 
         .rating-options {
             display: flex;
             justify-content: space-between;
-            width: 140%;
-            /* Make the rating options cover the full width */
+            width: 100%;
         }
+
+    
 
         .rating-option:hover {
             border-color: rgb(121, 121, 174);
@@ -274,14 +293,23 @@
         }
 
         .rating-option:after {
-            content: attr(data-text);
-            position: absolute;
-            top: 48px;
-            left: -17px;
-            width: 204%;
-            font-size: 12px;
-            color: grey;
-        }
+    content: attr(data-text);
+    position: absolute;
+    top: 48px;
+    font-size: 12px;
+    color: grey;
+    white-space: nowrap;
+}
+
+.rating-option:first-child:after {
+    left: 4px; /* Adjust as needed */
+    text-align: right;
+}
+
+.rating-option:last-child:after {
+    right: 0px; /* Adjust as needed */
+    text-align: left;
+}
 
         .submit-button-container {
             text-align: center;
@@ -297,8 +325,8 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 720px;
-            margin-right: -90px;
+            
+            margin-right: 0;
         }
 
         @media screen and (max-width: 900px) {
@@ -370,12 +398,18 @@
 
             }
 
-            .input-group input,
-            .input-group select,
-            .input-group textarea {
-                width: 135%;
-                align-items: left;
+    
+
+           
+
+            .input-group select {
+                appearance: none; 
+                padding-left: 10px; 
             }
+            .input-group textarea {
+            height: 130px; 
+        }
+    
 
             .container {
                 flex-direction: row;
@@ -397,7 +431,7 @@
             }
 
             .input-group {
-                width: 80%;
+                width: 100%;
             }
 
             .rating-slider {
@@ -541,7 +575,7 @@
                     <input type="email" name="email" id="email">
 
                     <div class="rating-container">
-                        <label for="future-projects">How likely are you to work with us on future projects?</label>
+                        <label for="future-projects" class="ratings-label">How likely are you to work with us on future projects?</label>
                         <div id="future-projects" class="rating-options">
                             <div class="rating-option selected" data-text="Not very likely" value="1"
                                 onclick="fn_click(1)">1
@@ -569,9 +603,7 @@
 
                     </div>
                 </div>
-                <div class="submit-button-container">
-                    <button type="submit" class="submit-button" onclick="submitFeedback()">Submit</button>
-                </div>
+                
 
 
                 <div class="right-section">
@@ -580,6 +612,9 @@
                     <img src="images/towfiqu-barbhuiya-0ZUoBtLw3y4-unsplash.jpg" alt="Image 6">
                 </div>
             </div>
+            <div class="submit-button-container">
+                    <button type="submit" class="submit-button" onclick="submitFeedback()">Submit</button>
+                </div>
     </div>
     </form>
 
