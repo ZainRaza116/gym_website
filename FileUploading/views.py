@@ -1,59 +1,56 @@
-from django.shortcuts import render,redirect
-from django.contrib.auth import authenticate, login , logout
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from .models import User 
+from .models import User, Feedback
 from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
-from .models import *
-from django.http import JsonResponse
-
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework import  permissions
-# from .test import generate_frames
-from django.http import StreamingHttpResponse
-from django.views.decorators import gzip
-from django.shortcuts import render
+from rest_framework import permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-def FileUploading(request):
-        if request.method == "POST":
-            email = request.POST.get("email")
-            password = request.POST.get("password")
-            
-            user = authenticate(request, username=email, password=password)
-            if user is not None:
-                login(request, user)
-                return render(request, 'navbar.html')
-            else:
-                return render(request, "fileupload.html", {"error": "Invalid credentials"})
 
-        return render(request, 'fileupload.html')
+def FileUploading(request):
+    if request.method == "POST":
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        
+        user = authenticate(request, username=email, password=password)
+        print(user)
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            return render(request, "fileupload.html", {"error": "Invalid credentials"})
+
+    return render(request, 'fileupload.html')
 
 def signup(request):
     if request.method == "POST":
-            email = request.POST.get("email")
-            password = request.POST.get("password")
-            first_name = request.POST.get("first_name")
-            company = request.POST.get("company")
-            # Check if the email is unique
-            if User.objects.filter(email=email).exists():
-                return render(request, "register.html", {"error": "Email already exists"})
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        first_name = request.POST.get("first_name")
+        company = request.POST.get("company")
         
-            user = User.objects.create_user(email=email, password=password, name=first_name , company=company)
-            user.save()
+        if User.objects.filter(email=email).exists():
+            return render(request, "login.html", {"error": "Email already exists"})
+    
+        user = User.objects.create_user(email=email, password=password, name=first_name, company=company)
+        user.save()
 
-            user = authenticate(request, username=email, password=password)
-            login(request, user)
-            return render(request, 'navbar.html')
+        user = authenticate(request, username=email, password=password)
+        login(request, user)
+        return redirect('home')
     return render(request, 'login.html')
 
+@login_required
 def Home(request):
-
     return render(request, 'navbar.html')
 
+@login_required
 def how(request):
     return render(request, 'how.html')
+
 def getFeedbackMessage(value):
     if value <= 30:
         return "Strongly Dislike"
@@ -66,9 +63,9 @@ def getFeedbackMessage(value):
     else:
         return "Love"
 
+@login_required
 def feedback(request):
     feed = Feedback.objects.all()
-    print(feed)
     if request.method == 'POST':
         demo_rating_value = int(request.POST.get('demo_rating', 4))
         subject = request.POST.get('subject', '')
@@ -88,12 +85,6 @@ def feedback(request):
 
     return render(request, "feedback.html")
 
-
-# @gzip.gzip_page
-# def live_feed(request):
-#     return StreamingHttpResponse(generate_frames(), content_type="multipart/x-mixed-replace;boundary=frame")
-
+@login_required
 def excercise(request):
     return render(request, 'excercise.html')
-
-
