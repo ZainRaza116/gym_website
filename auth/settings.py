@@ -92,8 +92,9 @@ DATABASES = {
 }
 AUTH_USER_MODEL = 'FileUploading.User'
 
+LOGIN_URL = '/'  # Where to redirect if user isn't logged in
+LOGIN_REDIRECT_URL = 'home'  # Where to redirect after login
 
-# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
