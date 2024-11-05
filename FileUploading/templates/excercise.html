@@ -11,11 +11,32 @@
       .container {
         position: relative;
         max-width: 1100px;
-        margin: 60px auto;
+        margin: auto;
         padding: 0 20px;
         text-align: center;
       }
+      .body-container {
+          display: flex; /* Use flex to create two columns */
+       justify-content: left;
+        margin: 10px auto;
+       
+        padding: 0 5px;
+  }
+.left-container{
+  width: 30%; /* Ensure both containers take up equal width */
+ 
+}
+.right-container
+  width: 65%; /* Ensure both containers take up equal width */
+  
+}
 
+ .right-container {
+  position: fixed; /* Allow it to stay in the normal document flow */
+  
+  margin-left:50px;
+  top: 0;
+}
       header {
         display: flex;
         align-items: center;
@@ -65,10 +86,14 @@
         height: 20px;
       }
 
-      .exercise-option:nth-child(4).exercise-option.clicked {
-        padding: 9px !important;
-      }
-
+      
+      .stacked-container {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-start; /* Align everything to the left */
+    margin-top: 2px;
+    width: 100%; /* Ensure it takes full width */
+}
       .exercise-container {
         border: 1px solid rgb(201, 193, 193);
         border-radius: 7px;
@@ -153,11 +178,14 @@
       }
       .additional-buttons {
         display: flex;
+        text-align: left;
+        margin-top: 20px;
         flex-direction: column;
-        align-items: right;
+        
         margin-bottom: -1px;
         width: 280px;
       }
+   
       .blue-button {
         margin-bottom: 5px;
         padding: 10px;
@@ -168,6 +196,7 @@
         cursor: pointer;
         margin: 5px;
         margin-left: 35px;
+        width: 240px;
       }
       .modal {
         display: none;
@@ -229,6 +258,8 @@
       .sample-exercise-header {
         display: flex;
         align-items: center;
+        justify-content: space-between; /* This pushes the close button to the right */
+         position: relative;
       }
       .sample-exercise-line {
         width: 900px;
@@ -285,24 +316,201 @@
         border-radius: 50%;
         transition: 0.4s;
       }
-      .toggle-input:checked + .toggle-slider:before {
-        transform: translateX(18px);
-      }
-      #live-camera-feed {
-        width: 650px;
-        height: 423px;
-        border: 1px solid #ccc;
-        margin-top: -289px;
-        margin-left: 345px;
-      }
-      .live-camera-feed {
-        width: 100%;
-        max-width: 774px;
-        height: auto;
-        border: 1px solid #ccc;
-        margin-top: -1px;
-        margin-left: -1px;
-      }
+      
+      .toggle-input:checked + .toggle-slider {
+  background-color: rgba(30, 152, 215, 255);
+}
+
+.toggle-input:checked + .toggle-slider:before {
+  transform: translateX(18px);
+}
+/* Live Camera Container */
+ .live-camera-container {
+  position: relative;
+  width: 100%;
+  height: auto;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+} 
+.live-camera-container {
+  width: 600px;
+  height: auto; /* Set a fixed height to match the size when an option is selected */
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  
+}
+
+/* Live Camera Feed (Video and other elements) */
+#live-camera-feed {
+  position: relative; /* Ensure the full-screen icon is positioned relative to this container */
+  width: 100%;
+  height: auto;
+  background-color: #f9f9f9;
+}
+
+/* Full-screen icon */
+.fullscreen-icon {
+  position: absolute;
+  top: 10px; /* Positioned in the top-right corner of the live camera feed */
+  right: 10px;
+  font-size: 24px;
+  color: white; /* To contrast with the video background */
+  cursor: pointer;
+  z-index: 10; /* Ensure it stays above the live camera feed */
+  background-color: rgba(0, 0, 0, 0.5); /* Add background to make the icon visible */
+  padding: 5px;
+  border-radius: 50%;
+}
+
+/* Full-screen mode for the live-camera-container */
+.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  z-index: 1000; /* Ensure it's above all other elements */
+}
+
+/* Full-screen video adjustments */
+.fullscreen video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; 
+}
+
+/* Metrics container below the camera container */
+.metrics-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+  margin-top: 10px;
+  background-color: #fff;
+}
+
+.metric {
+  flex: 1;
+  text-align: center;
+  padding: 5px;
+  background-color: #f9f9f9;
+  border-right: 1px solid #ddd;
+}
+
+.metric:last-child {
+  border-right: none;
+}
+
+/* Heading above and value below for metrics */
+.metric-heading {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.metric-value {
+  font-size: 16px;
+  color: #333;
+}
+
+/* Hide metrics in full-screen mode */
+.fullscreen + #metrics-container {
+  display: none;
+}
+
+
+.stacked-container {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: flex-start;
+}
+
+.additional-option {
+  margin-left: 35px; /* Keep buttons aligned on the left */
+}
+
+#exercise-gif {
+  width: 300px; /* Set a consistent width for all GIFs */
+  height: 200px; /* Set a consistent height for all GIFs */
+  object-fit: cover; /* Ensure the GIF maintains its aspect ratio */
+  margin-top: 20px; /* Add space from the live camera container */
+}
+
+
+/* Regular video styling */
+#webcam-video {
+  width: 100%; /* Fit the container width */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: contain; /* Maintain aspect ratio, preventing zooming */
+}
+
+/* Full-screen styling to fill the screen without zooming */
+.fullscreen #webcam-video {
+  width: 100vw; /* Full viewport width */
+  height: 100vh; /* Full viewport height */
+  object-fit: fill; /* Ensures the video fills the viewport without maintaining aspect ratio */
+}
+.table-container {
+  width: 100%; /* Ensures it takes up the full width of the live camera container */
+  margin-top: 20px;
+}
+.exercise-table {
+  width: 100%; /* Consistent width with live camera */
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+.exercise-table th,
+.exercise-table td {
+  padding-right: 25px;
+  padding-left: 25px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 1px solid #ccc;
+  text-align: center;
+  font-size: 14px;
+  background-color: #f2f2f2;
+}
+.exercise-table tbody tr:nth-child(odd) td {
+  background-color: #B2BEB5;
+}
+
+.exercise-table tbody tr:nth-child(even) td {
+  background-color: #D3D3D3;
+}
+.exercise-table th {
+  background-color: #A9A9A9;
+  font-weight: bold;
+}
+
+.exercise-table td b {
+  font-weight: bold;
+}
+
+/* Styling for the dropdown */
+.exercise-table td  b.remarks-selects {
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 14px;
+  color: #333;
+  border: 1px solid #018749;
+  border-radius: 8px;
+  background-color: #ACE1AF;
+  font-weight: bold;
+ 
+}
+
+
+
+#processed-video,
+#test-capture-image {
+  display: none; /* Hide canvas and image elements */
+}
+
+    
       @media screen and (max-width: 900px) {
         nav li {
           margin: 0;
@@ -339,35 +547,33 @@
         .exercise-option:nth-child(6) {
           padding: 7px !important;
         }
-        #live-camera-feed {
-          width: 300px;
-          height: 300px;
-          margin-left: 290px;
-          margin-top: -288px;
-        }
-        .live-camera-feed {
-          width: 100%;
-          max-width: 1000px;
-          height: inherit;
-        }
-        #webcam-video {
-          position: absolute;
-          opacity: 0;
-          width: 0;
-          height: 0;
-          overflow: hidden;
-          display: none !important;
-          pointer-events: none;
+      
+      
+        .close-icon {
+        background-color: transparent;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        position: absolute;
+        right: 10px; /* Adjust spacing */
+        top: 20px;
+}
+
+        #exercise-video-container {
+            display: none; /* Hide the video container initially */
+            margin-top: 20px;
+            width: 60%; /* Adjust the width to ensure it stays aligned to the left */
+            text-align: left; /* Align to the left */
+            margin-left: -30px;
         }
 
-        .live-camera-feed {
-          width: 100%;
-          max-width: 774px;
-          height: auto;
-          border: 1px solid #ccc;
-          margin-top: -1px;
-          margin-left: -1px;
+
+        iframe {
+            width: 100%; 
+            height: 315px; 
         }
+
+
       }
     </style>
     <head>
@@ -417,91 +623,414 @@
         />
       </header>
       <div class="exercise-container">
-        <div class="nav-button prev">&#8249; Prev</div>
-        <div class="exercise-option"><a href="#">Bridge</a></div>
-        <div class="exercise-option"><a href="#">Squats</a></div>
-        <div class="exercise-option"><a href="#">Downward Planks</a></div>
-        <div class="exercise-option"><a href="#">Plum and Level</a></div>
-        <div class="nav-button next">Next &#8250;</div>
-      </div>
+  <div class="nav-button prev">&#8249; Prev</div>
+  <div class="exercise-option" id="bridge"><a href="#">Bridge</a></div>
+  <div class="exercise-option" id="squats"><a href="#">Squats</a></div>
+  <div class="exercise-option" id="downward-plank"><a href="#">Downward Plank</a></div>
+  <div class="exercise-option" id="plum"><a href="#">Plum and Level</a></div>
+  <div class="nav-button next">Next &#8250;</div>
+</div>
 
-      <!-- New container for additional divs and buttons -->
-      <div class="additional-option">
-        Show Colored Overlay
-        <label class="toggle-container">
-          <input
-            type="checkbox"
-            class="toggle-input"
-            onchange="updateToggleValue(this, 'toggle-value-1')"
-          />
-          <span class="toggle-slider"></span>
-        </label>
-        <input type="hidden" id="toggle-value-1" value="0" />
-      </div>
-
-      <div class="additional-option">
-        Show Angles on Overlay
-        <label class="toggle-container">
-          <input
-            type="checkbox"
-            class="toggle-input"
-            onchange="updateToggleValue(this, 'toggle-value-2')"
-          />
-          <span class="toggle-slider"></span>
-        </label>
-        <input type="hidden" id="toggle-value-2" value="0" />
-      </div>
-
-      <div class="additional-option">
-        Show Info Table
-        <label class="toggle-container">
-          <input
-            type="checkbox"
-            class="toggle-input"
-            onchange="updateToggleValue(this, 'toggle-value-3')"
-          />
-          <span class="toggle-slider"></span>
-        </label>
-        <input type="hidden" id="toggle-value-3" value="0" />
-      </div>
-
-      <div class="additional-buttons">
-        <button class="blue-button">Show Sample Exercise</button>
-        <button class="blue-button">Show Sample Demo</button>
-        <button class="blue-button">Start Feedback</button>
-      </div>
-      <!-- ============================= webcam-video =============================== -->
-      <div id="live-camera-feed">
-        <video style="display: none" id="webcam-video" autoplay></video>
-        <canvas
-          style="display: none"
-          id="processed-video"
-          class="live-camera-feed"
-        ></canvas>
-        <img
-          src=""
-          id="test-capture-image"
-          class="live-camera-feed"
-        />
+    
+      <div class="body-container">
+  <!-- Left Side (Buttons, Toggles) -->
+  <div class="left-container">
+    <div class="row">
+      <!-- Demo Video and Buttons Container -->
+      <div class="demo-container">
+        <div class="additional-option">
+          Show Colored Overlay
+          <label class="toggle-container">
+            <input type="checkbox" class="toggle-input" onchange="updateToggleValue(this, 'toggle-value-1')" />
+            <span class="toggle-slider"></span>
+          </label>
+          <input type="hidden" id="toggle-value-1" value="0" />
+        </div>
+        <div class="additional-option">
+          Show Angles on Overlay
+          <label class="toggle-container">
+            <input type="checkbox" class="toggle-input" onchange="updateToggleValue(this, 'toggle-value-2')" />
+            <span class="toggle-slider"></span>
+          </label>
+          <input type="hidden" id="toggle-value-2" value="0" />
+        </div>
+        <div class="additional-option">
+          Show Info Table
+          <label class="toggle-container">
+            <input type="checkbox" class="toggle-input" onchange="updateToggleValue(this, 'toggle-value-3')" />
+            <span class="toggle-slider"></span>
+          </label>
+          <input type="hidden" id="toggle-value-3" value="0" />
+        </div>
+        <div class="additional-option">
+          Show Sample Exercise
+          <label class="toggle-container">
+            <input type="checkbox" class="toggle-input" id="sampleExerciseToggle" onchange="toggleVideo()" />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="stacked-container">
+          <button class="blue-button">Show Sample Demo</button>
+          <button class="blue-button">Start Feedback</button>
+        </div>
+        <div id="exercise-video-container">
+          <img id="exercise-gif" src="" alt="Sample Exercise" style="display: none;">
+        </div>
+        
       </div>
     </div>
-    <div class="modal">
+  </div>
+
+
+  
+
+ <div class="right-container">
+  <div class="live-camera-container" id="liveCameraContainer">
+    <div id="live-camera-feed">
+      <!-- Full-Screen Icon on Top-Right Corner of Live Camera Feed -->
+     
+      <video id="webcam-video" autoplay></video>
+      <canvas id="processed-video" class="live-camera-feed"></canvas>
+      <img src="" id="test-capture-image" class="live-camera-feed" />
+    </div>
+  </div> 
+  <div class="table-container">
+    <table id="bridge-table" class="exercise-table" style="display: none;">
+      <thead>
+        <tr>
+          <th>Joints</th>
+          <th>Current</th>
+          <th>Step 1</th>
+          <th>Step 2</th>
+          <th>Remarks</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Hip Left</b></td>
+          <td><b>168</b></td>
+          <td>65-85</td>
+          <td><b>155-175</b></td>
+          <td><b class="remarks-selects">Good</b></td>
+          {% comment %} <td>
+            <select class="remarks-select">
+              <option value="great">Great</option>
+              <option value="good">Good</option>
+              <option value="bad">Bad</option>
+              <option value="worst">Worst</option>
+            </select>
+          </td> {% endcomment %}
+        </tr>
+        <tr>
+          <td><b>Hip Right</b></td>
+          <td><b>167</b></td>
+          <td>65-85</td>
+          <td><b>155-175</b></td>
+          <td><b class="remarks-selects">Good</b></td>
+          {% comment %} <td>
+            <select class="remarks-select">
+              <option value="great">Great</option>
+              <option value="good">Good</option>
+              <option value="bad">Bad</option>
+              <option value="worst">Worst</option>
+            </select>
+          </td> {% endcomment %}
+        </tr>
+        <tr>
+          <td><b>Knee Left</b></td>
+          <td><b>180</b></td>
+          <td>70-90</td>
+          <td><b>165-185</b></td>
+          <td><b class="remarks-selects">Good</b></td>
+          {% comment %} <td>
+            <select class="remarks-select">
+              <option value="great">Great</option>
+              <option value="good">Good</option>
+              <option value="bad">Bad</option>
+              <option value="worst">Worst</option>
+            </select>
+          </td> {% endcomment %}
+        </tr>
+        <tr>
+          <td><b>Knee Right</b></td>
+          <td><b>178</b></td>
+          <td>70-90</td>
+          <td><b>165-185</b></td>
+          <td><b class="remarks-selects">Good</b></td>
+          {% comment %} <td>
+            <select class="remarks-select">
+              <option value="great">Great</option>
+              <option value="good">Good</option>
+              <option value="bad">Bad</option>
+              <option value="worst">Worst</option>
+            </select>
+          </td> {% endcomment %}
+        </tr>
+      </tbody>
+    </table>
+
+    <table id="squats-table" class="exercise-table" style="display: none;">      <thead>
+        <tr>
+          <th>Joints</th>
+          <th>Current</th>
+          <th>Step 1</th>
+          <th>Step 2</th>
+          <th>Remarks</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Hip Left</b></td>
+          <td><b>168</b></td>
+          <td>65-85</td>
+          <td><b>155-175</b></td>
+          <td><b class="remarks-selects">Good</b></td>
+          {% comment %} <td>
+            <select class="remarks-select">
+              <option value="great">Great</option>
+              <option value="good">Good</option>
+              <option value="bad">Bad</option>
+              <option value="worst">Worst</option>
+            </select>
+          </td> {% endcomment %}
+        </tr>
+        <tr>
+          <td><b>Hip Right</b></td>
+          <td><b>167</b></td>
+          <td>65-85</td>
+          <td><b>155-175</b></td>
+          <td><b class="remarks-selects">Good</b></td>
+          {% comment %} <td>
+            <select class="remarks-select">
+              <option value="great">Great</option>
+              <option value="good">Good</option>
+              <option value="bad">Bad</option>
+              <option value="worst">Worst</option>
+            </select>
+          </td> {% endcomment %}
+        </tr>
+        <tr>
+          <td><b>Knee Left</b></td>
+          <td><b>180</b></td>
+          <td>70-90</td>
+          <td><b>165-185</b></td>
+          <td><b class="remarks-selects">Good</b></td>
+          {% comment %} <td>
+            <select class="remarks-select">
+              <option value="great">Great</option>
+              <option value="good">Good</option>
+              <option value="bad">Bad</option>
+              <option value="worst">Worst</option>
+            </select>
+          </td> {% endcomment %}
+        </tr>
+        <tr>
+          <td><b>Knee Right</b></td>
+          <td><b>178</b></td>
+          <td>70-90</td>
+          <td><b>165-185</b></td>
+          <td><b class="remarks-selects">Good</b></td>
+          {% comment %} <td>
+            <select class="remarks-select">
+              <option value="great">Great</option>
+              <option value="good">Good</option>
+              <option value="bad">Bad</option>
+              <option value="worst">Worst</option>
+            </select>
+          </td> {% endcomment %}
+        </tr>
+      </tbody>
+    </table>
+    <table id="downward-plank-table" class="exercise-table" style="display: none;">      <tr>
+        <th>Joints</th>
+        <th>Current</th>
+        <th>Step 1</th>
+        <th>Step 2</th>
+        <th>Remarks</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>Arm Left</b></td>
+        <td><b>168</b></td>
+        <td>65-85</td>
+        <td><b>155-175</b></td>
+        <td><b class="remarks-selects">Good</b></td>
+        {% comment %} <td>
+          <select class="remarks-select">
+            <option value="great">Great</option>
+            <option value="good">Good</option>
+            <option value="bad">Bad</option>
+            <option value="worst">Worst</option>
+          </select>
+        </td> {% endcomment %}
+      </tr>
+      <tr>
+        <td><b>Elbow Right</b></td>
+        <td><b>167</b></td>
+        <td>65-85</td>
+        <td><b>155-175</b></td>
+        <td><b class="remarks-selects">Good</b></td>
+        {% comment %} <td>
+          <select class="remarks-select">
+            <option value="great">Great</option>
+            <option value="good">Good</option>
+            <option value="bad">Bad</option>
+            <option value="worst">Worst</option>
+          </select>
+        </td> {% endcomment %}
+      </tr>
+      <tr>
+        <td><b>Elbow Left</b></td>
+        <td><b>180</b></td>
+        <td>70-90</td>
+        <td><b>165-185</b></td>
+        <td><b class="remarks-selects">Good</b></td>
+        {% comment %} <td>
+          <select class="remarks-select">
+            <option value="great">Great</option>
+            <option value="good">Good</option>
+            <option value="bad">Bad</option>
+            <option value="worst">Worst</option>
+          </select>
+        </td> {% endcomment %}
+      </tr>
+      <tr>
+        <td><b>Arm Right</b></td>
+        <td><b>178</b></td>
+        <td>70-90</td>
+        <td><b>165-185</b></td>
+        <td><b class="remarks-selects">Good</b></td>
+        {% comment %} <td>
+          <select class="remarks-select">
+            <option value="great">Great</option>
+            <option value="good">Good</option>
+            <option value="bad">Bad</option>
+            <option value="worst">Worst</option>
+          </select>
+        </td> {% endcomment %}
+      </tr>
+    </tbody>
+  </table>
+  <table id="plum-level-table" class="exercise-table" style="display: none;">
+    <tr>
+      <th>Joints</th>
+      <th>Current</th>
+      <th>Step 1</th>
+      <th>Step 2</th>
+      <th>Remarks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>Shoulder Left</b></td>
+      <td><b>168</b></td>
+      <td>65-85</td>
+      <td><b>155-175</b></td>
+      <td><b class="remarks-selects">Good</b></td>
+      {% comment %} <td>
+        <select class="remarks-select">
+          <option value="great">Great</option>
+          <option value="good">Good</option>
+          <option value="bad">Bad</option>
+          <option value="worst">Worst</option>
+        </select>
+      </td> {% endcomment %}
+    </tr>
+    <tr>
+      <td><b>Shoulder Right</b></td>
+      <td><b>167</b></td>
+      <td>65-85</td>
+      <td><b>155-175</b></td>
+      <td><b class="remarks-selects">Good</b></td>
+      {% comment %} <td>
+        <select class="remarks-select">
+          <option value="great">Great</option>
+          <option value="good">Good</option>
+          <option value="bad">Bad</option>
+          <option value="worst">Worst</option>
+        </select>
+      </td> {% endcomment %}
+    </tr>
+    <tr>
+      <td><b>Knee Left</b></td>
+      <td><b>180</b></td>
+      <td>70-90</td>
+      <td><b>165-185</b></td>
+      <td><b class="remarks-selects">Good</b></td>
+      {% comment %} <td>
+        <select class="remarks-select">
+          <option value="great">Great</option>
+          <option value="good">Good</option>
+          <option value="bad">Bad</option>
+          <option value="worst">Worst</option>
+        </select>
+      </td> {% endcomment %}
+    </tr>
+    <tr>
+      <td><b>Knee Right</b></td>
+      <td><b>178</b></td>
+      <td>70-90</td>
+      <td><b>165-185</b></td>
+      <td><b class="remarks-selects">Good</b></td>
+      {% comment %} <td>
+        <select class="remarks-select">
+          <option value="great">Great</option>
+          <option value="good">Good</option>
+          <option value="bad">Bad</option>
+          <option value="worst">Worst</option>
+        </select>
+      </td> {% endcomment %}
+    </tr>
+  </tbody>
+</table>
+  </div>
+
+  {% comment %} <!-- Metrics Container (Below the Camera Container) -->
+  <div id="metrics-container" class="metrics-container">
+    <div class="metric">
+      <div class="metric-heading">Knee Angle</div>
+      <div class="metric-value" id="knee-angle"></div>
+    </div>
+    <div class="metric">
+      <div class="metric-heading">Standing Range</div>
+      <div class="metric-value" id="standing-range"></div>
+    </div>
+    <div class="metric">
+      <div class="metric-heading">Squat Range</div>
+      <div class="metric-value" id="squat-range"></div>
+    </div>
+    <div class="metric">
+      <div class="metric-heading">Actual Measure</div>
+      <div class="metric-value" id="actual-measure"></div>
+    </div>
+    <div class="metric">
+      <div class="metric-heading">Feedback</div>
+      <div class="metric-value" id="feedback"></div>
+    </div>
+  </div> {% endcomment %}
+</div>
+     
+      </div>
+    </div>
+    <div class="modal" id="exerciseModal">
       <div class="modal-content">
         <div class="modal-sample-exercise">
           <div class="sample-exercise-header">
-            <img
-              src="images/victor-freitas-WvDYdXDzkhs-unsplash.jpg"
-              alt="Sample Exercise Image"
-              style="
-                width: 50px;
-                height: 40px;
-                margin-right: 10px;
-                margin-top: 10px;
-              "
-            />
-            <span class="sample-exercise-text">Sample Exercise</span>
-          </div>
-        </div>
+        <img
+          src="images/victor-freitas-WvDYdXDzkhs-unsplash.jpg"
+          alt="Sample Exercise Image"
+          style="
+            width: 50px;
+            height: 40px;
+            margin-right: 2px;
+            margin-top: 10px;
+          "
+        />
+        <span class="sample-exercise-text">Sample Exercise</span>
+        <button class="close-icon">&times;</button> <!-- Close icon added here -->
+      </div>
+    </div>
 
         <div class="sample-exercise-line"></div>
 
@@ -510,126 +1039,303 @@
           class="sample-exercise-line"
           style="margin-top: 15px; margin-bottom: 5px"
         ></div>
-        <div class="modal-buttons">
-          <button class="modal-button modal-cancel">Cancel</button>
-          <button class="modal-button modal-ok">OK</button>
-        </div>
+        
       </div>
     </div>
-
     <script>
-async function startWebcam() {
-    const webcamVideo = document.getElementById("webcam-video");
-    const processedCanvas = document.getElementById("processed-video");
-    const ctx = processedCanvas.getContext("2d");
-    const websocket = new WebSocket("ws://127.0.0.1:8001/ws/video/");
+function toggleFullScreen() {
+  const container = document.getElementById('liveCameraContainer');
+  const webcamVideo = document.getElementById('webcam-video');
 
-    let lastFrameTime = 0;
-
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia({
-                video: true,
-            });
-            webcamVideo.srcObject = stream;
-
-            webcamVideo.addEventListener("loadedmetadata", function () {
-                processedCanvas.width = webcamVideo.videoWidth;
-                processedCanvas.height = webcamVideo.videoHeight;
-            });
-
-            webcamVideo.addEventListener("play", function () {
-                const sendFrame = () => {
-                    const currentFrameTime = performance.now();
-                    const frameDelay = currentFrameTime - lastFrameTime;
-
-                    if (frameDelay >= 20) {  // Adjusting to send frames every ~50 ms
-                        lastFrameTime = currentFrameTime;
-
-                        ctx.drawImage(webcamVideo, 0, 0);
-                        const frameData = processedCanvas.toDataURL("image/jpeg", 0.7); // Reduce quality if needed
-
-                        // Retrieve the state of each toggle
-                        const showColoredOverlay = document.getElementById('toggle-value-1').value === "1";
-                        const showAnglesOnOverlay = document.getElementById('toggle-value-2').value === "1";
-                        const showInfoTable = document.getElementById('toggle-value-3').value === "1";
-
-                        // Send the frame data along with the toggle states
-                        websocket.send(JSON.stringify({
-                            frame: frameData,
-                            show_colored_overlay: showColoredOverlay,
-                            show_angles_on_overlay: showAnglesOnOverlay,
-                            show_info_table: showInfoTable
-                        }));
-
-                        console.log(`Delay between frames: ${frameDelay.toFixed(2)} ms`);
-                    }
-
-                    requestAnimationFrame(sendFrame); // Continue to the next frame
-                };
-                sendFrame();
-            });
-
-            websocket.onmessage = function (event) {
-                const data = JSON.parse(event.data);
-                const imgElement = document.getElementById("test-capture-image");
-                imgElement.src = data.processed_frame;
-                if (data.processed_frame) {
-                    const img = new Image();
-                    img.onload = function () {
-                        ctx.drawImage(
-                            img,
-                            0,
-                            0,
-                            processedCanvas.width,
-                            processedCanvas.height
-                        );
-                    };
-                    img.src = data.processed_frame;
-                }
-            };
-        } catch (error) {
-            console.error("Error accessing camera:", error);
-        }
-    } else {
-        console.error("getUserMedia not supported in this browser");
-    }
+  if (!document.fullscreenElement) {
+    // Request full screen
+    container.requestFullscreen().catch((err) => {
+      alert(`Error attempting to enable full-screen mode: ${err.message}`);
+    });
+    
+    container.classList.add('fullscreen'); 
+    webcamVideo.style.objectFit = 'cover'; // Fill the screen without borders
+  } else {
+    // Exit full screen
+    document.exitFullscreen();
+    container.classList.remove('fullscreen');
+    webcamVideo.style.objectFit = 'contain'; // Reset to original aspect ratio
+  }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    startWebcam();
+
+
+// Example: Optionally update the metrics dynamically (sample data for now)
+ document.getElementById('knee-angle').innerText = '80°';
+document.getElementById('standing-range').innerText = '170-180°';
+document.getElementById('squat-range').innerText = '80-90°';
+document.getElementById('actual-measure').innerText = '110°';
+document.getElementById('feedback').innerText = 'Good posture';
+
+    
+</script>
+<script> function showTable(exercise) {
+  // Hide all tables
+  document.getElementById("bridge-table").style.display = "none";
+  document.getElementById("squats-table").style.display = "none";
+  document.getElementById("downward-plank-table").style.display = "none";
+  document.getElementById("plum-level-table").style.display = "none";
+
+  // Show the specific table based on selected exercise
+  if (exercise === "bridge") {
+    document.getElementById("bridge-table").style.display = "table";
+  } else if (exercise === "squats") {
+    document.getElementById("squats-table").style.display = "table";
+  } else if (exercise === "downwardPlank") {
+    document.getElementById("downward-plank-table").style.display = "table";
+  } else if (exercise === "plumLevel") {
+    document.getElementById("plum-level-table").style.display = "table";
+  }
+}
+
+// Event listeners for each exercise button
+document.getElementById("bridge").addEventListener("click", function() {
+  showTable("bridge");
 });
 
+document.getElementById("squats").addEventListener("click", function() {
+  showTable("squats");
+});
+
+document.getElementById("downward-plank").addEventListener("click", function() {
+  showTable("downwardPlank");
+});
+
+document.getElementById("plum-level").addEventListener("click", function() {
+  showTable("plumLevel");
+});
+ // Define GIFs for each exercise
+
+// Ensure consistent container sizing on initial load
+document.addEventListener("DOMContentLoaded", function() {
+  const rightContainer = document.querySelector('.right-container');
+  rightContainer.style.width = '65%'; // Set consistent width on load
+});
+</script>
+
+
+    <script>
+  // Define GIFs for each exercise
+const exerciseGifs = {
+  'bridge': '/images/Bridge.gif',
+  'squats': '/images/Squat.gif',
+  'downward_plank': '/images/Downward Plank.gif',
+  'plum': 'https://media.self.com/photos/5a79d7614faf5c43cedbfd66/master/w_320%2Cc_limit/pilates_10.gif',
+
+};
+
+// Updated toggle logic
+function toggleVideo() {
+  const toggle = document.getElementById("sampleExerciseToggle");
+  const videoContainer = document.getElementById("exercise-video-container");
+
+  if (toggle.checked) {
+    // Show the GIF container if toggle is checked
+    updateExerciseGif();
+    videoContainer.style.display = "block";
+  } else {
+    // Hide the GIF container if toggle is unchecked
+    videoContainer.style.display = "none";
+  }
+}
+
+function updateExerciseGif() {
+  const gifElement = document.getElementById('exercise-gif');
+
+  // If no exercise is selected or there's no GIF, hide the GIF element
+  if (!currentExercise || !exerciseGifs[currentExercise]) {
+    gifElement.style.display = 'none';
+    return;
+  }
+
+  // Set the correct GIF for the selected exercise
+  gifElement.src = exerciseGifs[currentExercise];
+  gifElement.style.display = 'block'; // Show the GIF
+}
+
+// Event listeners for exercise selections
+document.getElementById('bridge').addEventListener('click', function () {
+  currentExercise = 'bridge';
+  toggleVideo(); // Call toggle function to update visibility
+});
+
+document.getElementById('squats').addEventListener('click', function () {
+  currentExercise = 'squats';
+  toggleVideo();
+});
+
+document.getElementById('downward-plank').addEventListener('click', function () {
+  currentExercise = 'downward-plank';
+  toggleVideo();
+});
+
+document.getElementById('plum').addEventListener('click', function () {
+  currentExercise = 'plum';
+  toggleVideo();
+});
+
+// Initially hide the GIF container
+document.addEventListener("DOMContentLoaded", function() {
+  document.getElementById("exercise-video-container").style.display = "none";
+});
+
+
+let currentExercise = ''; // Store the selected exercise
+
+// Function to update the exercise GIF
+function updateExerciseGif() {
+  const gifElement = document.getElementById('exercise-gif');
+
+  // If there's no selected exercise or no GIF, hide the gif element
+  if (!currentExercise || !exerciseGifs[currentExercise]) {
+    gifElement.style.display = 'none';
+    return;
+  }
+
+  // Set the correct GIF based on the selected exercise
+  gifElement.src = exerciseGifs[currentExercise];
+  gifElement.style.display = 'block';
+}
+
+// Listen for changes in the exercise selection (for example, through buttons or dropdowns)
+document.getElementById('bridge').addEventListener('click', function () {
+  currentExercise = 'bridge';
+  updateExerciseGif(); // Update GIF
+});
+
+document.getElementById('squats').addEventListener('click', function () {
+  currentExercise = 'squats';
+  updateExerciseGif(); // Update GIF
+});
+
+document.getElementById('downward-plank').addEventListener('click', function () {
+  currentExercise = 'downward-plank';
+  updateExerciseGif(); // Update GIF
+});
+
+document.getElementById('plum').addEventListener('click', function () {
+  currentExercise = 'plum';
+  updateExerciseGif(); // Update GIF
+});
+
+document.getElementById('level').addEventListener('click', function () {
+  currentExercise = 'level';
+  updateExerciseGif(); // Update GIF
+});
+
+// Toggle sample exercise visibility
+document.getElementById('show-sample-exercise').addEventListener('click', function () {
+  updateExerciseGif(); // Show the selected exercise GIF when toggle is clicked
+});
+
+
+// Updated GIF toggle logic
+
+
+
     </script>
-    <!-- <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                    const liveCameraFeedContainer = document.getElementById('live-camera-feed');
-        
-                    // Check if the browser supports the getUserMedia API
-                    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                        // Access the user's camera
-                        navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } })
-                            .then(function (stream) {
-                                // Create a video element for the live camera feed
-                                const videoElement = document.createElement('video');
-                                videoElement.srcObject = stream;
-                                videoElement.autoplay = true;
-                                videoElement.width = 640; // Set the desired width
-                                videoElement.height = 480; // Set the desired height
-        
-                                // Append the video element to the container
-                                liveCameraFeedContainer.appendChild(videoElement);
-                            })
-                            .catch(function (error) {
-                                console.error('Error accessing camera:', error);
-                            });
-                    } else {
-                        console.error('getUserMedia not supported in this browser');
-                    }
-        
-                    // Add the rest of your existing script code here
-                });
-            </script> -->
+
+    <script>
+  // Select the modal and close icon
+  const modal = document.getElementById("exerciseModal");
+  const closeIcon = document.querySelector(".close-icon");
+
+  // Function to close the modal
+  closeIcon.addEventListener("click", () => {
+    modal.style.display = "none"; // Hide the modal when close icon is clicked
+  });
+</script>
+<script>
+  async function startWebcam() {
+      const webcamVideo = document.getElementById("webcam-video");
+      const processedCanvas = document.getElementById("processed-video");
+      const ctx = processedCanvas.getContext("2d");
+      const websocket = new WebSocket("ws://127.0.0.1:8001/ws/video/");
+  
+      let lastFrameTime = 0;
+  
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+          try {
+              const stream = await navigator.mediaDevices.getUserMedia({
+                  video: true,
+              });
+              webcamVideo.srcObject = stream;
+  
+              webcamVideo.addEventListener("loadedmetadata", function () {
+                  processedCanvas.width = webcamVideo.videoWidth;
+                  processedCanvas.height = webcamVideo.videoHeight;
+              });
+  
+              webcamVideo.addEventListener("play", function () {
+                  const sendFrame = () => {
+                      const currentFrameTime = performance.now();
+                      const frameDelay = currentFrameTime - lastFrameTime;
+  
+                      if (frameDelay >= 20) {  // Adjusting to send frames every ~50 ms
+                          lastFrameTime = currentFrameTime;
+  
+                          ctx.drawImage(webcamVideo, 0, 0);
+                          const frameData = processedCanvas.toDataURL("image/jpeg", 0.7); // Reduce quality if needed
+  
+                          // Retrieve the state of each toggle
+                          const showColoredOverlay = document.getElementById('toggle-value-1').value === "1";
+                          const showAnglesOnOverlay = document.getElementById('toggle-value-2').value === "1";
+                          const showInfoTable = document.getElementById('toggle-value-3').value === "1";
+  
+                          // Send the frame data along with the toggle states
+                          websocket.send(JSON.stringify({
+                              frame: frameData,
+                              show_colored_overlay: showColoredOverlay,
+                              show_angles_on_overlay: showAnglesOnOverlay,
+                              show_info_table: showInfoTable
+                          }));
+  
+                          console.log(`Delay between frames: ${frameDelay.toFixed(2)} ms`);
+                      }
+  
+                      requestAnimationFrame(sendFrame); // Continue to the next frame
+                  };
+                  sendFrame();
+              });
+  
+              websocket.onmessage = function (event) {
+                  const data = JSON.parse(event.data);
+                  const imgElement = document.getElementById("test-capture-image");
+                  imgElement.src = data.processed_frame;
+                  if (data.processed_frame) {
+                      const img = new Image();
+                      img.onload = function () {
+                          ctx.drawImage(
+                              img,
+                              0,
+                              0,
+                              processedCanvas.width,
+                              processedCanvas.height
+                          );
+                      };
+                      img.src = data.processed_frame;
+                  }
+              };
+          } catch (error) {
+              console.error("Error accessing camera:", error);
+          }
+      } else {
+          console.error("getUserMedia not supported in this browser");
+      }
+  }
+  
+  document.addEventListener("DOMContentLoaded", function () {
+      startWebcam();
+  });
+  
+      </script>
+
+
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const exerciseOptions = document.querySelectorAll(".exercise-option");
@@ -759,6 +1465,186 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(toggleValues);
         console.log("hello world");
       }
+      document.addEventListener("DOMContentLoaded", function () {
+  // Set Bridge as default selected exercise
+  const bridgeOption = document.getElementById('bridge');
+  currentExercise = 'bridge';
+  updateClickedOption(bridgeOption);
+  
+  // Show Bridge table by default
+  showTable('bridge');
+  
+  // Enable Show Sample Exercise toggle by default
+  const sampleExerciseToggle = document.getElementById('sampleExerciseToggle');
+  sampleExerciseToggle.checked = true;
+  
+  // Show the exercise GIF container and update with Bridge GIF
+  const videoContainer = document.getElementById("exercise-video-container");
+  videoContainer.style.display = "block";
+  
+  // Update the exercise GIF
+  const gifElement = document.getElementById('exercise-gif');
+  gifElement.src = exerciseGifs['bridge'];
+  gifElement.style.display = 'block';
+
+  // Initialize other event listeners
+  const exerciseOptions = document.querySelectorAll(".exercise-option");
+  const navButtons = document.querySelectorAll(".nav-button");
+  const toggleButtons = document.querySelectorAll(".toggle-button");
+  const sampleExerciseButton = document.querySelector(".blue-button");
+  const modal = document.querySelector(".modal");
+
+  exerciseOptions.forEach(function (option) {
+    option.addEventListener("click", function () {
+      updateClickedOption(option);
+    });
+  });
+
+  navButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      const currentClickedOption = document.querySelector(".exercise-option.clicked");
+      const currentIndex = Array.from(exerciseOptions).indexOf(currentClickedOption);
+      let newIndex;
+
+      if (button.classList.contains("next")) {
+        newIndex = (currentIndex + 1) % exerciseOptions.length;
+      } else if (button.classList.contains("prev")) {
+        newIndex = (currentIndex - 1 + exerciseOptions.length) % exerciseOptions.length;
+      }
+
+      updateClickedOption(exerciseOptions[newIndex]);
+    });
+  });
+
+  // Update the updateClickedOption function to handle GIF updates
+  function updateClickedOption(option) {
+    const exerciseOptions = document.querySelectorAll(".exercise-option");
+    exerciseOptions.forEach(function (el) {
+      el.classList.remove("clicked");
+    });
+    
+    option.classList.add("clicked");
+    
+    // Update currentExercise based on the clicked option
+    const exerciseId = option.id;
+    currentExercise = exerciseId;
+    
+    // Show corresponding table
+    showTable(exerciseId);
+    
+    // Update GIF if sample exercise toggle is checked
+    if (sampleExerciseToggle.checked) {
+      updateExerciseGif();
+    }
+  }
+
+  // Keep the video container visible when toggling if Bridge is selected
+  document.getElementById("sampleExerciseToggle").addEventListener("change", function() {
+    toggleVideo();
+  });
+});
+ // Update showTable function to check for toggle state
+ function showTable(exercise) {
+    const infoTableToggle = document.getElementById('toggle-value-3');
+    const tableContainer = document.querySelector('.table-container');
+    
+    // First hide all tables
+    document.getElementById("bridge-table").style.display = "none";
+    document.getElementById("squats-table").style.display = "none";
+    document.getElementById("downward-plank-table").style.display = "none";
+    document.getElementById("plum-level-table").style.display = "none";
+
+    // Only show table if the info table toggle is enabled
+    if (infoTableToggle.value === "1") {
+      tableContainer.style.display = 'block';
+      // Show the specific table based on selected exercise
+      if (exercise === "bridge") {
+        document.getElementById("bridge-table").style.display = "table";
+      } else if (exercise === "squats") {
+        document.getElementById("squats-table").style.display = "table";
+      } else if (exercise === "downward-plank") {
+        document.getElementById("downward-plank-table").style.display = "table";
+      } else if (exercise === "plum") {
+        document.getElementById("plum-level-table").style.display = "table";
+      }
+    } else {
+      tableContainer.style.display = 'none';
+    }
+  }
+
+  // Update the toggle value change handler
+  function updateToggleValue(toggle, inputId) {
+    const toggleValueInput = document.getElementById(inputId);
+    toggleValueInput.value = toggle.checked ? "1" : "0";
+    
+    // If this is the info table toggle, update table visibility
+    if (inputId === 'toggle-value-3') {
+      showTable(currentExercise);
+    }
+  }
+
+  // Add event listener for the info table toggle
+  const infoTableToggle = document.querySelector('input[onchange*="toggle-value-3"]');
+  infoTableToggle.addEventListener('change', function() {
+    updateToggleValue(this, 'toggle-value-3');
+  });
+
+  function updateClickedOption(option) {
+    const exerciseOptions = document.querySelectorAll(".exercise-option");
+    exerciseOptions.forEach(function (el) {
+      el.classList.remove("clicked");
+    });
+    
+    option.classList.add("clicked");
+    
+    // Update currentExercise based on the clicked option
+    const exerciseId = option.id;
+    currentExercise = exerciseId;
+    
+    // Show corresponding table (will only show if toggle is enabled)
+    showTable(exerciseId);
+    
+    // Update GIF if sample exercise toggle is checked
+    if (sampleExerciseToggle.checked) {
+      updateExerciseGif();
+    }
+  }
+
+  // Event listeners for exercise options
+  exerciseOptions.forEach(function (option) {
+    option.addEventListener("click", function () {
+      updateClickedOption(option);
+    });
+  });
+
+  // Event listeners for navigation buttons
+  navButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      const currentClickedOption = document.querySelector(".exercise-option.clicked");
+      const currentIndex = Array.from(exerciseOptions).indexOf(currentClickedOption);
+      let newIndex;
+
+      if (button.classList.contains("next")) {
+        newIndex = (currentIndex + 1) % exerciseOptions.length;
+      } else if (button.classList.contains("prev")) {
+        newIndex = (currentIndex - 1 + exerciseOptions.length) % exerciseOptions.length;
+      }
+
+      updateClickedOption(exerciseOptions[newIndex]);
+    });
+  });
+
+  // Keep the video container visible when toggling if Bridge is selected
+  document.getElementById("sampleExerciseToggle").addEventListener("change", function() {
+    toggleVideo();
+  });
+
+  // Make the updateToggleValue function globally available
+  window.updateToggleValue = updateToggleValue;
+  // Make the showTable function globally available
+  window.showTable = showTable;
     </script>
+
+    
   </body>
 </html>
