@@ -126,6 +126,7 @@
         .input-group textarea {
             width: 140%; 
             height: 40px; 
+            resize: none;
             margin: 10px; 
             padding: 2px; 
             border: 1px solid rgb(199, 182, 182);
@@ -319,14 +320,16 @@
 
         /* Add these styles for the submit button */
         .submit-button {
-            background-color: rgb(82, 128, 226);
+            background-color: rgba(30, 152, 215, 255);
             color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            
-            margin-right: 0;
+            padding: 10px 20px; /* Increase padding for a larger button */
+    font-size: 18px; /* Increase font size */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100px; 
+    margin-right: 0;
+
         }
 
         @media screen and (max-width: 900px) {
