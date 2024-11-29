@@ -289,6 +289,7 @@
         transform: translateX(18px);
       }
       #live-camera-feed {
+        position: relative;
         width: 650px;
         height: 423px;
         border: 1px solid #ccc;
@@ -305,7 +306,7 @@
       }
       .demo-gif-container {
     display: none;
-    width: 320px;
+    width: 230px;
     height: 204px;
     margin: 20px auto;
     border: 1px solid #ccc;
@@ -313,7 +314,7 @@
     overflow: hidden;
     position: absolute;
     top: 482px;
-    left: 15%;
+    left: 15.5%;
     transform: translateX(-50%);
 }
 
@@ -327,19 +328,23 @@ div {
       }
 
       .demo-gif {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
+    width: 100%;       /* Stretch to full width of container */
+    height: 100%;      /* Stretch to full height of container */
+    object-fit: cover; /* Maintain aspect ratio while filling container */
+}
+
       table {
     border-collapse: collapse;
-    width: 73%;
-    max-width: 664px;
+    width: 61%;
+    max-width: 650px;
     margin: 81px auto;
     font-family: Arial, sans-serif;
     font-size: 14px;
     background-color: rgba(207, 209, 208, 255);
-    margin-left: 339px;
+    margin-left: 345px;
+}
+table.visible {
+  visibility: visible;
 }
 .remarks {
     font-weight: bold;
@@ -388,6 +393,24 @@ div {
       color: green;
       font-weight: bold;
     }
+    .fullscreen-button {
+  position: absolute;
+  bottom: 380px;
+  right: 13px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 1000; /* Ensure it stays on top */
+}
+
+.fullscreen-button:hover {
+  background-color: #333;
+}
+
 
       @media screen and (max-width: 900px) {
         nav li {
@@ -569,9 +592,12 @@ div {
         <button class="blue-button">Start Feedback</button>
 
       </div>
+      
 
       <!-- ============================= webcam-video =============================== -->
+      
       <div id="live-camera-feed">
+        <button id="fullscreen-btn" class="fullscreen-button">⛶</button>
         <video style="display: none" id="webcam-video" autoplay></video>
         <canvas
           style="display: none"
@@ -662,6 +688,32 @@ div {
       </div>
 
     </div>
+    <script>
+      document.getElementById("fullscreen-btn").addEventListener("click", () => {
+  const image = document.getElementById("test-capture-image");
+
+  if (!document.fullscreenElement) {
+    // Enter fullscreen mode
+    if (image.requestFullscreen) {
+      image.requestFullscreen();
+    } else if (image.webkitRequestFullscreen) { // For Safari
+      image.webkitRequestFullscreen();
+    } else if (image.msRequestFullscreen) { // For IE/Edge
+      image.msRequestFullscreen();
+    }
+  } else {
+    // Exit fullscreen mode
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) { // For Safari
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { // For IE/Edge
+      document.msExitFullscreen();
+    }
+  }
+});
+
+      </script>
 
     <script>
       document.addEventListener('DOMContentLoaded', function() {
