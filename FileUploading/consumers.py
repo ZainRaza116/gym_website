@@ -63,8 +63,9 @@ class CameraConsumer(AsyncWebsocketConsumer):
         # Generate random joint data and remarks
         joints_data, remarks = self.generate_joint_data()
 
-        # Apply the image_set filter with toggle states
-        processed_frame = self.image_set(frame, show_colored_overlay, show_angles_on_overlay, show_info_table)
+        # Apply the image_set filter with toggle states and joint data
+        processed_frame = self.image_set(frame, joints_data, remarks, 
+                                         show_colored_overlay, show_angles_on_overlay, show_info_table)
         _, buffer = cv2.imencode('.jpg', processed_frame)
         processed_frame_data = base64.b64encode(buffer).decode('utf-8')
         
@@ -75,9 +76,28 @@ class CameraConsumer(AsyncWebsocketConsumer):
             'remarks': remarks
         }))
 
-    def image_set(self, img, show_colored_overlay, show_angles_on_overlay, show_info_table):
+    def image_set(self, img, joints_data, remarks, show_colored_overlay, show_angles_on_overlay, show_info_table):
+        # Convert to grayscale and process
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) 
         equ = cv2.equalizeHist(gray) 
         blurred = cv2.GaussianBlur(src=equ, ksize=(3, 5), sigmaX=0.5) 
         edges = cv2.Canny(blurred, 70, 135)
+
+        # Overlay optional features
+        if show_colored_overlay:
+            overlay = img.copy()
+            cv2.addWeighted(overlay, 0.4, img, 0.6, 0, img)
+
+        if show_angles_on_overlay:
+            for joint, angle in joints_data.items():
+                cv2.putText(img, f'{joint}: {angle}', (10, 30 + 20 * list(joints_data.keys()).index(joint)),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1, cv2.LINE_AA)
+
+        if show_info_table:
+            y_offset = 20
+            for joint, remark in remarks.items():
+                cv2.putText(img, f'{joint}: {remark}', (10, y_offset),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1, cv2.LINE_AA)
+                y_offset += 20
+
         return edges
