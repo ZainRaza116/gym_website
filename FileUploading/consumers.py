@@ -9,7 +9,8 @@ import random
 
 class CameraConsumer(AsyncWebsocketConsumer):
     def __init__(self):
-        self.last_frame_time = None  
+        self.last_frame_time = None
+        self.bold_step_one = False 
         super().__init__()
 
     async def connect(self):
@@ -68,12 +69,13 @@ class CameraConsumer(AsyncWebsocketConsumer):
                                          show_colored_overlay, show_angles_on_overlay, show_info_table)
         _, buffer = cv2.imencode('.jpg', processed_frame)
         processed_frame_data = base64.b64encode(buffer).decode('utf-8')
-        
-        # Send both the processed frame and joint data
+        print(self.bold_step_one)
+        # Send both the processed frame, joint data, and step bolding information
         await self.send(text_data=json.dumps({
             'processed_frame': f'data:image/jpeg;base64,{processed_frame_data}',
             'joints_data': joints_data,
-            'remarks': remarks
+            'remarks': remarks,
+            'bold_step_one': self.bold_step_one  # Send the bolding preference
         }))
 
     def image_set(self, img, joints_data, remarks, show_colored_overlay, show_angles_on_overlay, show_info_table):
