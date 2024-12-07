@@ -384,14 +384,13 @@ table.visible {
       color: rgba(153, 153, 153, 255);
     }
     td.joints,
-    td.current,
-    td.step2 {
+    td.current {
       font-weight: bold;
     }
 
     td.remarks {
       color: green;
-      font-weight: bold;
+      
     }
     .fullscreen-button {
   position: absolute;
@@ -926,6 +925,24 @@ async function startWebcam() {
                                    remarkText === 'Warning' ? 'orange' : 
                                    'red';
             remarkCell.style.fontWeight = 'bold';
+        });
+
+        // Handle step column bolding
+        const tableRows = document.querySelectorAll('table tbody tr');
+        tableRows.forEach(row => {
+            const step1Cell = row.querySelector('td:nth-child(3)');
+            const step2Cell = row.querySelector('td:nth-child(4)');
+
+            // Reset styles first
+            step1Cell.style.fontWeight = 'normal';
+            step2Cell.style.fontWeight = 'normal';
+
+            // Bold the appropriate column based on bold_step_one
+            if (data.bold_step_one) {
+                step1Cell.style.fontWeight = 'bold';
+            } else {
+                step2Cell.style.fontWeight = 'bold';
+            }
         });
     }
 };
