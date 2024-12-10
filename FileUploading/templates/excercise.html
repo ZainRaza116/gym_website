@@ -832,6 +832,7 @@ demoGif.style.maxHeight = '100%';
 
     <script>
 async function startWebcam() {
+    let selectedExercise = 'bridge';
     const webcamVideo = document.getElementById("webcam-video");
     const processedCanvas = document.getElementById("processed-video");
     const ctx = processedCanvas.getContext("2d");
@@ -852,34 +853,40 @@ async function startWebcam() {
             });
 
             webcamVideo.addEventListener("play", function () {
-                const sendFrame = () => {
-                    const currentFrameTime = performance.now();
-                    const frameDelay = currentFrameTime - lastFrameTime;
+// Find this in your existing code where you send frames
+const sendFrame = () => {
+    const currentFrameTime = performance.now();
+    const frameDelay = currentFrameTime - lastFrameTime;
 
-                    if (frameDelay >= 20) {  // Adjusting to send frames every ~50 ms
-                        lastFrameTime = currentFrameTime;
+    if (frameDelay >= 20) {  // Adjusting to send frames every ~50 ms
+        lastFrameTime = currentFrameTime;
 
-                        ctx.drawImage(webcamVideo, 0, 0);
-                        const frameData = processedCanvas.toDataURL("image/jpeg", 0.7); // Reduce quality if needed
+        ctx.drawImage(webcamVideo, 0, 0);
+        const frameData = processedCanvas.toDataURL("image/jpeg", 0.7);
 
-                        // Retrieve the state of each toggle
-                        const showColoredOverlay = document.getElementById('toggle-value-1').value === "1";
-                        const showAnglesOnOverlay = document.getElementById('toggle-value-2').value === "1";
-                        const showInfoTable = document.getElementById('toggle-value-3').value === "1";
+        // Get the currently selected exercise
+        const selectedExercise = document.querySelector('.exercise-option.clicked').getAttribute('data-exercise');
+        console.log('Current exercise:', selectedExercise); // For debugging
 
-                        // Send the frame data along with the toggle states
-                        websocket.send(JSON.stringify({
-                            frame: frameData,
-                            show_colored_overlay: showColoredOverlay,
-                            show_angles_on_overlay: showAnglesOnOverlay,
-                            show_info_table: showInfoTable
-                        }));
+        // Retrieve the state of each toggle
+        const showColoredOverlay = document.getElementById('toggle-value-1').value === "1";
+        const showAnglesOnOverlay = document.getElementById('toggle-value-2').value === "1";
+        const showInfoTable = document.getElementById('toggle-value-3').value === "1";
 
-                        console.log(`Delay between frames: ${frameDelay.toFixed(2)} ms`);
-                    }
+        // Send the frame data along with the selected exercise
+        websocket.send(JSON.stringify({
+            frame: frameData,
+            selected_exercise: selectedExercise,  // Add this line
+            show_colored_overlay: showColoredOverlay,
+            show_angles_on_overlay: showAnglesOnOverlay,
+            show_info_table: showInfoTable
+        }));
 
-                    requestAnimationFrame(sendFrame); // Continue to the next frame
-                };
+        console.log(`Delay between frames: ${frameDelay.toFixed(2)} ms`);
+    }
+
+    requestAnimationFrame(sendFrame);
+};
                 sendFrame();
             });
 
