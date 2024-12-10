@@ -55,7 +55,9 @@ class CameraConsumer(AsyncWebsocketConsumer):
         show_colored_overlay = text_data_json.get('show_colored_overlay', False)
         show_angles_on_overlay = text_data_json.get('show_angles_on_overlay', False)
         show_info_table = text_data_json.get('show_info_table', False)
-
+        if 'selected_exercise' in text_data_json:
+            self.selected_exercise = text_data_json['selected_exercise']
+            print("Exercise selected:", self.selected_exercise)
         # Decode the base64 image
         frame_bytes = base64.b64decode(frame_data.split(',')[1])
         np_arr = np.frombuffer(frame_bytes, np.uint8)
